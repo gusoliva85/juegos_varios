@@ -1,0 +1,14 @@
+# Dependencias de la FUNCIÓN Python de Vercel (api/index.py).
+# Vercel instala este archivo (raíz) al construir la función.
+# Las herramientas de dev/test están en backend/requirements.txt.
+
+fastapi>=0.115,<1.0
+sqlmodel>=0.0.22
+pydantic>=2.8,<3.0
+pydantic-settings>=2.4,<3.0
+
+# PostgreSQL (Supabase) vía el pooler
+psycopg[binary]>=3.2,<4.0
+
+# Verificación del JWT de Supabase
+pyjwt>=2.9,<3.0

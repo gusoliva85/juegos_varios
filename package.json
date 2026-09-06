@@ -1,0 +1,13 @@
+{
+  "name": "mesa-y-ficha",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Plataforma de minijuegos online — build del frontend (Tailwind).",
+  "scripts": {
+    "build:css": "tailwindcss -i frontend/src/styles/app.css -o frontend/public/app.css --minify",
+    "watch:css": "tailwindcss -i frontend/src/styles/app.css -o frontend/public/app.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

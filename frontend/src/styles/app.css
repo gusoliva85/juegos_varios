@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Mesa & Ficha — hoja de estilo del portal.
+   Fuente de verdad: .claude/skills/estilo-terracota-ludica/
+   Compila a public/app.css (Tailwind CLI v3.4, corrido desde frontend/).
+   ============================================================ */
+
+/* ---- Fuentes self-hosted (se agregan en F0.2.1) ---- */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 600 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/inter.woff2") format("woff2");
+  font-weight: 400 600;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(224, 168, 62, 0.14), transparent 40%),
+      radial-gradient(circle at 90% 0%, rgba(47, 143, 129, 0.12), transparent 42%);
+    background-attachment: fixed;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-[-.02em];
+  }
+  ::selection {
+    @apply bg-terra text-paper;
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-terra ring-offset-2 ring-offset-cream;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.08s !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* ---------- Botones ---------- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 select-none cursor-pointer
+           border-2 border-ink rounded-[14px] bg-paper text-ink font-bold
+           px-5 py-3.5 text-sm shadow-hard transition-all duration-200 ease-pop
+           -translate-x-0 -translate-y-0;
+  }
+  .btn:hover {
+    @apply -translate-x-0.5 -translate-y-0.5 shadow-hard-lg;
+  }
+  .btn:active {
+    @apply translate-x-0.5 translate-y-0.5 shadow-hard-sm;
+  }
+  .btn-primary {
+    @apply bg-terra text-paper;
+  }
+  .btn-teal {
+    @apply bg-teal text-paper;
+  }
+  .btn-full {
+    @apply w-full sm:w-auto;
+  }
+  .btn:disabled {
+    @apply opacity-50 pointer-events-none shadow-hard translate-x-0 translate-y-0;
+  }
+
+  /* ---------- Tarjeta troquelada ---------- */
+  .card-chunky {
+    @apply relative border-2 border-ink rounded-md bg-paper shadow-hard
+           transition-all duration-200 ease-pop;
+  }
+  .card-chunky.is-link:hover {
+    @apply -translate-x-0.5 -translate-y-0.5 shadow-hard-lg cursor-pointer;
+  }
+
+  /* ---------- Panel (lobby, modal): sombra suave, no troquel ---------- */
+  .panel {
+    @apply border-2 border-ink rounded-lg bg-paper shadow-soft overflow-hidden;
+  }
+
+  /* ---------- Campo de texto ---------- */
+  .field {
+    @apply w-full border-2 border-ink rounded-sm bg-cream-2 px-4 py-3 text-ink font-semibold
+           tracking-[.13em] uppercase placeholder:text-ink-3 placeholder:font-medium;
+  }
+  .field:focus {
+    @apply outline-none shadow-hard;
+  }
+
+  /* ---------- Chip / filtro ---------- */
+  .chip {
+    @apply inline-flex items-center gap-1.5 border-2 border-ink rounded-full bg-paper
+           px-3.5 py-1.5 text-[13px] font-bold cursor-pointer transition-all duration-200 ease-pop;
+  }
+  .chip:hover {
+    @apply -translate-y-0.5;
+  }
+  .chip[aria-pressed="true"] {
+    @apply bg-ink text-cream;
+  }
+
+  /* ---------- Badge de estado ---------- */
+  .badge-state {
+    @apply inline-flex items-center gap-1.5 border-2 border-ink rounded-full px-2.5 py-0.5
+           text-[11px] font-extrabold uppercase tracking-[.04em] bg-cream;
+  }
+  .badge-live {
+    @apply bg-teal text-paper;
+  }
+  .badge-soon {
+    @apply bg-mustard text-ink;
+  }
+  .badge-wait {
+    @apply bg-mustard text-ink;
+  }
+  .badge-lock {
+    @apply bg-cream-2 text-ink-3;
+  }
+  .badge-live .dot {
+    @apply w-1.5 h-1.5 rounded-full bg-paper animate-pulse;
+  }
+
+  /* ---------- Pill "en vivo" de la topbar ---------- */
+  .pill {
+    @apply inline-flex items-center gap-2 border-2 border-ink rounded-full bg-paper
+           px-3 py-1.5 text-[13px] font-semibold shadow-hard-sm;
+  }
+  .pill .dot {
+    @apply w-2 h-2 rounded-full bg-teal animate-bob;
+  }
+
+  /* ---------- Badge rotado (hero) ---------- */
+  .badge-rot {
+    @apply inline-flex items-center gap-2 border-2 border-ink rounded-full bg-mustard text-ink
+           px-3.5 py-1.5 text-[13px] font-bold shadow-hard -rotate-1;
+  }
+
+  /* ---------- Bottom nav (solo mobile) ---------- */
+  .bottom-nav {
+    @apply md:hidden fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-cream/95 backdrop-blur
+           grid grid-cols-4 pb-[env(safe-area-inset-bottom)];
+  }
+  .bottom-nav a {
+    @apply flex flex-col items-center gap-0.5 py-2 text-[11px] font-bold text-ink-3;
+  }
+  .bottom-nav a[aria-current="page"] {
+    @apply text-terra-2;
+  }
+
+  /* ---------- Asiento del lobby ---------- */
+  .seat {
+    @apply flex items-center gap-3 border-2 border-ink rounded-[14px] bg-cream-2 p-3;
+  }
+  .seat .pic {
+    @apply w-9 h-9 grid place-items-center border-2 border-ink rounded-[11px] bg-paper
+           font-display font-extrabold text-sm;
+  }
+  .seat--empty {
+    @apply justify-center border-dashed text-ink-3 text-xs font-semibold bg-transparent;
+  }
+
+  /* ---------- Skeleton ---------- */
+  .skeleton {
+    @apply relative overflow-hidden bg-cream-2 rounded-md;
+  }
+  .skeleton::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    animation: shimmer 1.4s infinite;
+  }
+}

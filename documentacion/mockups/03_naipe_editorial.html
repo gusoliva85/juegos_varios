@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 3 · Naipe Editorial — Plataforma de Minijuegos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOCKUP 3 · "NAIPE EDITORIAL"
+   Claro, papel crema, tipografía display grande, rojo/negro de naipe.
+   Composición suiza / editorial. Sobrio pero con carácter.
+   ============================================================ */
+:root{
+  --paper:#f7f3ea;
+  --paper-2:#efe8d8;
+  --card:#fffdf8;
+  --ink:#1b1815;
+  --ink-2:#5b544a;
+  --ink-3:#8a8175;
+  --red:#b32b2b;
+  --red-soft:#f3ddd7;
+  --line:#1b1815;
+  --hair:rgba(27,24,21,.12);
+  --ring:rgba(27,24,21,.2);
+  --sh:0 1px 0 rgba(27,24,21,.04),0 12px 30px -14px rgba(27,24,21,.22);
+  --sh-lg:0 2px 0 rgba(27,24,21,.05),0 26px 60px -20px rgba(27,24,21,.3);
+  --ease:cubic-bezier(.22,1,.36,1);--dur:.3s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--paper);min-height:100vh;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(rgba(27,24,21,.03) 1px,transparent 1px);background-size:22px 22px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+
+/* Topbar */
+header{border-bottom:2px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:20}
+.bar{display:flex;align-items:center;gap:20px;padding:14px 0}
+.brand{font-family:'Fraunces',serif;font-weight:900;font-size:22px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.brand .k{display:inline-grid;grid-template-columns:1fr 1fr;gap:2px}
+.brand .k b{width:8px;height:8px;background:var(--ink)}
+.brand .k b:nth-child(2),.brand .k b:nth-child(3){background:var(--red)}
+.nav{margin-left:auto;display:flex;gap:4px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:13px;font-weight:500;padding:8px 12px;transition:var(--dur) var(--ease)}
+.nav a:hover{color:var(--red)}
+.chip-top{border:1.5px solid var(--line);padding:7px 13px;font-size:12px;font-weight:600;border-radius:0;
+  display:flex;align-items:center;gap:8px}
+.chip-top i{width:7px;height:7px;background:var(--red);border-radius:50%;animation:beat 1.8s var(--ease) infinite}
+@keyframes beat{50%{transform:scale(.55);opacity:.5}}
+
+/* Hero */
+.hero{padding:64px 0 30px;border-bottom:2px solid var(--line)}
+.hero .num{font-family:'Fraunces',serif;font-size:13px;letter-spacing:.3em;color:var(--ink-3)}
+h1{font-family:'Fraunces',serif;font-weight:800;font-size:clamp(46px,8vw,104px);line-height:.98;letter-spacing:-.03em;margin:14px 0 22px}
+h1 .r{color:var(--red)}
+h1 .out{-webkit-text-stroke:2px var(--ink);color:transparent}
+.hero-foot{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;margin-top:10px}
+.lead{font-size:16px;line-height:1.6;color:var(--ink-2);max-width:48ch}
+.cta-row{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;font-weight:600;font-size:14px;cursor:pointer;
+  border:2px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;transition:var(--dur) var(--ease)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--line)}
+.btn.primary{background:var(--red);border-color:var(--red);color:#fff}
+.btn.primary:hover{box-shadow:4px 4px 0 var(--ink)}
+.mini-card{justify-self:end;width:150px;height:210px;background:var(--card);border:2px solid var(--line);
+  display:flex;flex-direction:column;justify-content:space-between;padding:14px;box-shadow:var(--sh-lg);
+  font-family:'Fraunces',serif;transform:rotate(4deg);transition:var(--dur) var(--ease)}
+.mini-card:hover{transform:rotate(-2deg) scale(1.04)}
+.mini-card .c{font-size:22px}.mini-card .big{font-size:58px;text-align:center;color:var(--red)}
+.mini-card .c.b{align-self:end;transform:rotate(180deg)}
+
+/* Join */
+.join{display:grid;grid-template-columns:auto 1fr auto;gap:0;border-bottom:2px solid var(--line)}
+.join>div,.join>button{padding:22px 24px;border-right:2px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.join>button:last-child{border-right:0}
+.join .lbl{font-family:'Fraunces',serif;font-weight:700;font-size:16px}
+.join .sub{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.join input{border:0;background:transparent;font:inherit;font-size:20px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);width:100%}
+.join input:focus{outline:0}
+.join input::placeholder{color:var(--ink-3)}
+.join .go{background:var(--red);color:#fff;font-weight:700;font-size:14px;cursor:pointer;border:0;
+  align-items:center;flex-direction:row;gap:9px;transition:var(--dur) var(--ease)}
+.join .go:hover{background:var(--ink)}
+
+/* Section */
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;padding:40px 0 20px;border-bottom:1px solid var(--hair);flex-wrap:wrap;gap:12px}
+.sec-head h2{font-family:'Fraunces',serif;font-weight:800;font-size:30px;letter-spacing:-.02em}
+.sec-head h2 .idx{color:var(--red);font-size:16px;vertical-align:super;margin-right:6px}
+.filters{display:flex;gap:0;border:1.5px solid var(--line)}
+.filters button{background:transparent;border:0;border-right:1.5px solid var(--line);font-size:12px;font-weight:600;padding:8px 13px;cursor:pointer;color:var(--ink-2);transition:var(--dur) var(--ease)}
+.filters button:last-child{border-right:0}
+.filters button.on{background:var(--ink);color:var(--paper)}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:0;border-left:1px solid var(--hair);border-top:1px solid var(--hair);margin:26px 0 60px}
+.g{position:relative;border-right:1px solid var(--hair);border-bottom:1px solid var(--hair);padding:22px;
+  min-height:170px;display:flex;flex-direction:column;justify-content:space-between;cursor:pointer;
+  background:var(--paper);transition:var(--dur) var(--ease)}
+.g:hover{background:var(--card);box-shadow:inset 0 0 0 2px var(--line);z-index:1}
+.g .glyph{font-family:'Fraunces',serif;font-size:34px}
+.g.red .glyph{color:var(--red)}
+.g h4{font-family:'Fraunces',serif;font-weight:700;font-size:19px;margin-top:auto}
+.g .meta{font-size:12px;color:var(--ink-3);margin-top:4px}
+.g .state{position:absolute;top:20px;right:20px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.state.live{color:var(--red)}
+.state.soon,.state.lock{color:var(--ink-3)}
+.g.span3{grid-column:span 3}.g.span2{grid-column:span 2}
+.g.feature{grid-column:span 4;min-height:240px}
+.g.feature h4{font-size:32px}
+.g.feature .glyph{font-size:44px;letter-spacing:8px}
+.g.locked{opacity:.4;cursor:not-allowed}
+.g .idx{position:absolute;top:20px;left:22px;font-family:'Fraunces',serif;font-size:12px;color:var(--ink-3)}
+
+/* Lobby */
+.lobby{border:2px solid var(--line);margin-bottom:60px;background:var(--card)}
+.lobby-top{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:2px solid var(--line);flex-wrap:wrap;gap:8px}
+.lobby-top .t{font-family:'Fraunces',serif;font-weight:700;font-size:16px}
+.lobby-top .code{color:var(--red)}
+.tag{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--line);padding:3px 8px}
+.lg{display:grid;grid-template-columns:1.1fr 1fr}
+.seats{padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:0;border-right:2px solid var(--line)}
+.seat{display:flex;align-items:center;gap:11px;padding:14px;border:1px solid var(--hair);margin:-.5px}
+.seat .pic{width:34px;height:34px;border:2px solid var(--line);display:grid;place-items:center;font-family:'Fraunces',serif;font-size:14px}
+.seat .who{font-size:13.5px;font-weight:700}
+.seat .st{font-size:11px;color:var(--ink-3)}
+.seat .st.ready{color:var(--red);font-weight:600}
+.seat.empty{justify-content:center;color:var(--ink-3);font-size:12px;border-style:dashed}
+.seat.host .who::after{content:" ◆";color:var(--red)}
+.share{padding:20px;display:flex;flex-direction:column;gap:12px}
+.share label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.field{display:flex;align-items:center;gap:8px;padding:11px 12px;border:1.5px solid var(--line);font-size:13px}
+.field .v{flex:1;font-weight:700;letter-spacing:.08em}
+.field .v.link{letter-spacing:0;font-weight:500;color:var(--ink-2)}
+.copy{border:1.5px solid var(--line);background:var(--card);font-size:11px;font-weight:600;padding:5px 9px;cursor:pointer;transition:var(--dur) var(--ease)}
+.copy:hover{background:var(--ink);color:var(--paper)}
+.copy.done{background:var(--red);border-color:var(--red);color:#fff}
+.wa{padding:13px;background:var(--ink);color:var(--paper);font-weight:700;font-size:13.5px;border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:var(--dur) var(--ease)}
+.wa:hover{background:var(--red)}
+.start{padding:14px;background:var(--red);color:#fff;font-weight:800;font-size:14px;border:0;cursor:pointer;margin-top:auto;transition:var(--dur) var(--ease)}
+.start:hover{transform:translateY(-2px)}
+.host-note{font-size:10.5px;color:var(--ink-3);text-align:center}
+
+footer{border-top:2px solid var(--line);padding:30px 0 50px;font-size:12.5px;color:var(--ink-3)}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer a{color:var(--ink);text-decoration:underline}
+
+@media (max-width:980px){
+  .hero-foot{grid-template-columns:1fr}.mini-card{justify-self:start;margin-top:20px}
+  .join{grid-template-columns:1fr}.join>div,.join>button{border-right:0;border-bottom:2px solid var(--line)}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .g.span3,.g.span2,.g.feature{grid-column:span 2}
+  .lg{grid-template-columns:1fr}.seats{border-right:0;border-bottom:2px solid var(--line)}
+  .nav a{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="k"><b></b><b></b><b></b><b></b></span> LA BARAJA</div>
+    <nav class="nav"><a href="#catalogo">Juegos</a><a href="#lobby">Salas</a><a href="#">Créditos</a></nav>
+    <span class="chip-top"><i></i> 7 MESAS ABIERTAS</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="num">№ 01 — PORTAL</div>
+    <h1>Un <span class="r">código</span>,<br>cuatro <span class="out">sillas</span>,<br>una mesa.</h1>
+    <div class="hero-foot">
+      <div>
+        <p class="lead">Elegís el juego, se abre la sala con su código, lo pasás por WhatsApp,
+          y cuando están los cuatro el anfitrión da el arranque. Cartas y dados con una sola estética,
+          de punta a punta.</p>
+        <div class="cta-row">
+          <button class="btn primary">Crear sala rápida ▷</button>
+          <a href="#catalogo" class="btn">Ver los juegos</a>
+        </div>
+      </div>
+      <div class="mini-card">
+        <span class="c">♥</span><span class="big">A</span><span class="c b">♥</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="join">
+    <div><span class="lbl">Entrar con código</span><span class="sub">Te lo pasaron por chat</span></div>
+    <div><input type="text" placeholder="ESCOBA-9T4K" aria-label="Código de sala"></div>
+    <button class="go">Unirme ➜</button>
+  </section>
+
+  <section id="catalogo">
+    <div class="sec-head">
+      <h2><span class="idx">№02</span>El catálogo</h2>
+      <div class="filters">
+        <button class="on">Todos</button><button>Cartas</button><button>Dados</button><button>Tablero</button><button>Palabras</button>
+      </div>
+    </div>
+    <div class="bento">
+      <div class="g feature red">
+        <span class="idx">a.</span><span class="state live">◉ 3 salas en vivo</span>
+        <span class="glyph">♠ ♥ ♦ ♣</span>
+        <div><h4>Truco Argentino</h4><div class="meta">2 a 4 jugadores · con y sin flor · a 30</div></div>
+      </div>
+      <div class="g span2"><span class="idx">b.</span><span class="state live">◉ 1 sala</span><span class="glyph">⚄</span><h4>Generala</h4><div class="meta">2 a 6 · cinco dados</div></div>
+      <div class="g span2 red"><span class="idx">c.</span><span class="state">Activo</span><span class="glyph">♦</span><h4>Escoba de 15</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2"><span class="idx">d.</span><span class="state">Activo</span><span class="glyph">♣</span><h4>Chinchón</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2"><span class="idx">e.</span><span class="state">Activo</span><span class="glyph">⊗</span><h4>Ta-Te-Ti</h4><div class="meta">2 · con bot</div></div>
+      <div class="g span2"><span class="idx">f.</span><span class="state">Activo</span><span class="glyph">❯</span><h4>Ahorcado</h4><div class="meta">1 a 4</div></div>
+      <div class="g span2"><span class="idx">g.</span><span class="state soon">Pronto</span><span class="glyph">⚇</span><h4>Ludo</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2 locked"><span class="idx">h.</span><span class="state lock">Bloqueado</span><span class="glyph">⚀</span><h4>Dudo</h4><div class="meta">2 a 6</div></div>
+    </div>
+  </section>
+
+  <section id="lobby">
+    <div class="sec-head"><h2><span class="idx">№03</span>La sala de espera</h2></div>
+    <div class="lobby">
+      <div class="lobby-top">
+        <span class="t">Truco · <span class="code">TRUCO-7K2P</span></span>
+        <span style="display:flex;gap:8px;align-items:center"><span class="tag">En espera</span><span style="color:var(--ink-3);font-size:12px">3 / 4</span></span>
+      </div>
+      <div class="lg">
+        <div class="seats">
+          <div class="seat host"><span class="pic">◆</span><span><span class="who">Sofía</span><br><span class="st ready">✓ lista</span></span></div>
+          <div class="seat"><span class="pic">♞</span><span><span class="who">Nacho</span><br><span class="st ready">✓ listo</span></span></div>
+          <div class="seat"><span class="pic">♟</span><span><span class="who">Vicky</span><br><span class="st">esperando…</span></span></div>
+          <div class="seat empty">＋ silla abierta</div>
+        </div>
+        <div class="share">
+          <div><label>Código para dictar</label><div class="field"><span class="v">TRUCO-7K2P</span><button class="copy" data-copy="TRUCO-7K2P">copiar</button></div></div>
+          <div><label>Enlace directo</label><div class="field"><span class="v link">labaraja.club/t/TRUCO-7K2P</span><button class="copy" data-copy="https://labaraja.club/t/TRUCO-7K2P">copiar</button></div></div>
+          <button class="wa">Compartir por WhatsApp ➜</button>
+          <button class="start">Empezar la partida ▷</button>
+          <p class="host-note">Solo la anfitriona puede iniciar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap foot">
+  <div>LA BARAJA — minijuegos online · № 2026</div>
+  <div>Naipes y sonidos con licencias libres · <a href="#">créditos</a></div>
+</div></footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+}));
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);}catch(e){}
+  const t=b.textContent;b.textContent='copiado ✓';b.classList.add('done');
+  setTimeout(()=>{b.textContent=t;b.classList.remove('done');},1400);
+}));
+document.querySelector('.wa').addEventListener('click',()=>{
+  const txt=encodeURIComponent('Te invito a jugar al Truco ➜ https://labaraja.club/t/TRUCO-7K2P');
+  window.open('https://wa.me/?text='+txt,'_blank');
+});
+</script>
+</body>
+</html>

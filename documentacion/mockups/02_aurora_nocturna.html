@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 2 · Aurora Nocturna — Plataforma de Minijuegos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;450;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOCKUP 2 · "AURORA NOCTURNA"
+   Oscuro sobrio. Aurora animada esmeralda/cian/ámbar (NO violeta).
+   Vidrio auténtico, glow contenido, cartas que flotan.
+   ============================================================ */
+:root{
+  --bg-0:#07100f;
+  --bg-1:#0b1917;
+  --ink:#eef4f1;
+  --ink-2:#a9bcb6;
+  --ink-3:#6f8781;
+  --emerald:#43d99a;
+  --cyan:#4bc6d8;
+  --amber:#e9b562;
+  --accent:var(--emerald);
+  --glass:rgba(18,34,31,.5);
+  --glass-2:rgba(18,34,31,.7);
+  --ring:rgba(120,220,180,.16);
+  --hair:rgba(238,244,241,.08);
+  --sh:0 2px 8px rgba(0,0,0,.4), 0 30px 60px -24px rgba(0,0,0,.6);
+  --r-lg:24px;--r-md:16px;--r-sm:11px;
+  --ease:cubic-bezier(.22,1,.36,1);--dur:.34s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg-0);min-height:100vh;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+/* --- Aurora de fondo (2 capas, contenida en su propio layer) --- */
+.aurora{position:fixed;inset:-20% -10%;z-index:0;filter:blur(60px) saturate(1.15);pointer-events:none;
+  contain:strict;opacity:.7}
+.aurora span{position:absolute;border-radius:50%;mix-blend-mode:screen;will-change:transform}
+.aurora .a{width:52vw;height:52vw;left:-6vw;top:-12vw;background:radial-gradient(circle,var(--emerald),transparent 65%);animation:drift1 22s var(--ease) infinite alternate}
+.aurora .b{width:44vw;height:44vw;right:-8vw;top:4vw;background:radial-gradient(circle,var(--cyan),transparent 65%);animation:drift2 26s var(--ease) infinite alternate}
+.aurora .c{width:38vw;height:38vw;left:28vw;bottom:-16vw;background:radial-gradient(circle,var(--amber),transparent 66%);opacity:.5;animation:drift3 30s var(--ease) infinite alternate}
+@keyframes drift1{to{transform:translate(8vw,6vw) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-7vw,9vw) scale(1.1)}}
+@keyframes drift3{to{transform:translate(6vw,-7vw) scale(1.2)}}
+/* grano */
+body::after{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.4;
+  background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);background-size:3px 3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.aurora{filter:blur(60px)}}
+
+.wrap{position:relative;z-index:2;max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* Topbar */
+header{position:sticky;top:0;z-index:30;backdrop-filter:blur(16px);
+  background:linear-gradient(180deg,rgba(7,16,15,.8),rgba(7,16,15,.35));border-bottom:1px solid var(--hair)}
+.bar{display:flex;align-items:center;gap:18px;padding:14px 0}
+.brand{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px}
+.brand .m{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;color:#07100f;
+  background:linear-gradient(150deg,var(--emerald),var(--cyan));box-shadow:0 0 20px -4px var(--emerald)}
+.nav{margin-left:auto;display:flex;gap:6px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:14px;padding:8px 12px;border-radius:9px;transition:var(--dur) var(--ease)}
+.nav a:hover{color:var(--ink);background:rgba(120,220,180,.08)}
+.pill{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);padding:7px 12px;border-radius:99px;
+  border:1px solid var(--ring);background:var(--glass)}
+.pill i{width:7px;height:7px;border-radius:50%;background:var(--emerald);box-shadow:0 0 10px var(--emerald);animation:blink 2.2s var(--ease) infinite}
+@keyframes blink{50%{opacity:.35}}
+
+/* Hero */
+.hero{padding:80px 0 40px;text-align:left;display:grid;grid-template-columns:1fr;max-width:760px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--emerald);border:1px solid var(--ring);padding:6px 12px;border-radius:99px;background:var(--glass)}
+h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(40px,6vw,66px);line-height:1.03;
+  letter-spacing:-.02em;margin:22px 0 18px}
+.grad{background:linear-gradient(100deg,var(--emerald),var(--cyan) 55%,var(--amber));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--ink-2);font-size:17px;line-height:1.6;max-width:46ch}
+.cta-row{display:flex;gap:13px;margin-top:28px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:12px;font-weight:600;font-size:14.5px;
+  cursor:pointer;border:0;text-decoration:none;transition:var(--dur) var(--ease)}
+.btn.primary{background:linear-gradient(150deg,var(--emerald),#2fae7d);color:#06120f;box-shadow:0 0 0 1px rgba(255,255,255,.12) inset,0 14px 34px -12px rgba(67,217,154,.6)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 20px 44px -12px rgba(67,217,154,.75)}
+.btn.ghost{background:var(--glass);color:var(--ink);border:1px solid var(--ring);backdrop-filter:blur(8px)}
+.btn.ghost:hover{transform:translateY(-2px);background:var(--glass-2)}
+
+/* floating deck */
+.deck{position:absolute;right:-10px;top:120px;width:280px;height:360px;pointer-events:none}
+.fc{position:absolute;width:130px;height:184px;border-radius:16px;border:1px solid var(--ring);
+  background:linear-gradient(160deg,rgba(30,52,48,.9),rgba(14,28,26,.9));backdrop-filter:blur(6px);
+  box-shadow:var(--sh);display:grid;place-items:center;font-family:'Space Grotesk',sans-serif;font-size:40px;
+  animation:float 7s var(--ease) infinite}
+.fc.one{left:0;top:20px;color:var(--emerald);animation-delay:0s}
+.fc.two{left:70px;top:90px;color:var(--amber);animation-delay:-2.3s;transform:rotate(9deg)}
+.fc.three{left:20px;top:170px;color:var(--cyan);animation-delay:-4.6s;transform:rotate(-7deg)}
+@keyframes float{50%{transform:translateY(-16px) rotate(var(--r,0deg))}}
+.fc.two{--r:9deg}.fc.three{--r:-7deg}
+
+@media (max-width:980px){.deck{display:none}.hero{padding-top:56px}}
+
+/* Join */
+.join{display:flex;gap:14px;align-items:center;padding:16px;border-radius:var(--r-lg);
+  background:var(--glass-2);backdrop-filter:blur(12px);border:1px solid var(--ring);box-shadow:var(--sh);margin:6px 0 60px;flex-wrap:wrap}
+.join .txt{font-size:14px;color:var(--ink-2);flex:1;min-width:180px}
+.join input{padding:12px 15px;border-radius:11px;background:rgba(7,16,15,.6);border:1px solid var(--ring);
+  color:var(--ink);font:inherit;letter-spacing:.14em;text-transform:uppercase;width:200px}
+.join input:focus{outline:0;border-color:var(--emerald);box-shadow:0 0 0 4px rgba(67,217,154,.16)}
+
+/* Section */
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;margin:14px 0 22px;flex-wrap:wrap;gap:12px}
+.sec-head h2{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:27px;letter-spacing:-.01em}
+.segmented{position:relative;display:flex;gap:2px;padding:4px;border-radius:12px;background:var(--glass);border:1px solid var(--hair)}
+.segmented .thumb{position:absolute;top:4px;left:4px;height:calc(100% - 8px);border-radius:9px;background:rgba(67,217,154,.16);
+  border:1px solid var(--ring);transition:var(--dur) var(--ease);z-index:0}
+.seg{position:relative;z-index:1;background:0;border:0;color:var(--ink-2);font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer;transition:color .2s}
+.seg.on{color:var(--emerald)}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:66px}
+.g{position:relative;border-radius:var(--r-md);padding:20px;overflow:hidden;cursor:pointer;min-height:158px;
+  background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--hair);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  display:flex;flex-direction:column;justify-content:space-between;transition:var(--dur) var(--ease)}
+.g::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;opacity:0;transition:var(--dur) var(--ease);
+  background:linear-gradient(140deg,var(--emerald),var(--cyan));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude}
+.g:hover{transform:translateY(-4px)}
+.g:hover::before{opacity:.7}
+.g .glyph{font-size:28px;font-family:'Space Grotesk',sans-serif;color:var(--emerald)}
+.g.c2 .glyph{color:var(--amber)}.g.c3 .glyph{color:var(--cyan)}
+.g h4{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:18px;margin-top:auto}
+.g .meta{color:var(--ink-3);font-size:12.5px;margin-top:5px}
+.g .state{position:absolute;top:15px;right:15px;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:4px 9px;border-radius:99px;border:1px solid var(--hair);color:var(--ink-3)}
+.state.live{color:var(--emerald);border-color:var(--ring);background:rgba(67,217,154,.1)}
+.state.live i{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--emerald);margin-right:5px;box-shadow:0 0 8px var(--emerald);animation:blink 1.8s infinite}
+.g.span3{grid-column:span 3}.g.span2{grid-column:span 2}
+.g.feature{grid-column:span 3;min-height:230px}
+.g.feature h4{font-size:23px}
+.g.locked{opacity:.45;cursor:not-allowed}
+
+/* Lobby */
+.lobby{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--ring);box-shadow:var(--sh);
+  background:var(--glass-2);backdrop-filter:blur(14px);margin-bottom:66px}
+.lobby-top{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--hair);flex-wrap:wrap;gap:8px}
+.lobby-top .t{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:16px;display:flex;align-items:center;gap:10px}
+.lobby-top .code{color:var(--emerald);letter-spacing:.06em}
+.live-tag{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);padding:4px 9px;border-radius:99px;border:1px solid rgba(233,181,98,.35);background:rgba(233,181,98,.1)}
+.lg{display:grid;grid-template-columns:1.15fr 1fr}
+.seats{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:11px;border-right:1px solid var(--hair)}
+.seat{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:rgba(7,16,15,.4);border:1px solid var(--hair)}
+.seat .pic{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:13px;color:#06120f;background:linear-gradient(150deg,var(--emerald),var(--cyan))}
+.seat .who{font-size:13.5px;font-weight:600}.seat .st{font-size:11px;color:var(--ink-3)}
+.seat .st.ready{color:var(--emerald)}
+.seat.empty{border-style:dashed;justify-content:center;color:var(--ink-3);font-size:12.5px}
+.seat.host .who::after{content:" · anfitrión";color:var(--emerald);font-size:10.5px;font-weight:500}
+.share{padding:22px;display:flex;flex-direction:column;gap:11px}
+.share label{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.field{display:flex;align-items:center;gap:8px;padding:11px 13px;border-radius:10px;background:rgba(7,16,15,.55);border:1px solid var(--ring);font-size:13px}
+.field .v{flex:1;font-weight:600;letter-spacing:.06em}
+.field .v.link{letter-spacing:0;color:var(--ink-2);font-weight:500}
+.copy{background:0;border:1px solid var(--hair);color:var(--ink-2);border-radius:8px;padding:6px 10px;font-size:11.5px;cursor:pointer;transition:var(--dur) var(--ease)}
+.copy:hover{border-color:var(--ring);color:var(--emerald)}
+.copy.done{color:var(--emerald);border-color:var(--ring)}
+.wa{margin-top:2px;display:flex;align-items:center;justify-content:center;gap:9px;padding:13px;border-radius:11px;font-weight:600;font-size:13.5px;
+  background:linear-gradient(150deg,#25b56b,#189a5a);color:#eafff3;border:0;cursor:pointer;transition:var(--dur) var(--ease)}
+.wa:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(37,181,107,.7)}
+.start{margin-top:auto;padding:14px;border-radius:11px;border:0;cursor:pointer;font-weight:700;font-size:14px;
+  background:linear-gradient(150deg,var(--emerald),#2fae7d);color:#06120f;transition:var(--dur) var(--ease)}
+.start:hover{transform:translateY(-2px);box-shadow:0 14px 30px -12px rgba(67,217,154,.7)}
+.host-note{font-size:11px;color:var(--ink-3);text-align:center;margin-top:6px}
+
+footer{border-top:1px solid var(--hair);padding:34px 0 50px;color:var(--ink-3);font-size:13px}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer a{color:var(--ink-2);text-decoration:none}
+
+@media (max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .g.span3,.g.span2,.g.feature{grid-column:span 2}
+  .lg{grid-template-columns:1fr}
+  .seats{border-right:0;border-bottom:1px solid var(--hair)}
+  .nav a{display:none}
+}
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"><span class="a"></span><span class="b"></span><span class="c"></span></div>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="m">◈</span> Aurora</div>
+    <nav class="nav"><a href="#catalogo">Juegos</a><a href="#lobby">Salas</a><a href="#">Créditos</a></nav>
+    <span class="pill"><i></i> 12 jugando ahora</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="tag">◉ en vivo · sin registro</span>
+    <h1>Abrí una mesa.<br><span class="grad">Pasá el código.</span> Jugá.</h1>
+    <p class="lead">Un salón de minijuegos para 2 a 4. Creás la sala, mandás el enlace por WhatsApp,
+      y cuando están todos vos das el arranque. Cartas, dados y fichas, siempre con la misma estética.</p>
+    <div class="cta-row">
+      <button class="btn primary">Crear sala rápida ▷</button>
+      <a href="#catalogo" class="btn ghost">Explorar el salón</a>
+    </div>
+  </section>
+  <div class="deck" aria-hidden="true">
+    <div class="fc one">♠</div><div class="fc two">⚄</div><div class="fc three">♦</div>
+  </div>
+
+  <section class="join">
+    <span class="txt">¿Te pasaron un código de sala?</span>
+    <input type="text" placeholder="LUDO-M4XQ" aria-label="Código de sala">
+    <button class="btn primary">Unirme ➜</button>
+  </section>
+
+  <section id="catalogo">
+    <div class="sec-head">
+      <h2>Catálogo</h2>
+      <div class="segmented" id="seg">
+        <span class="thumb" id="thumb"></span>
+        <button class="seg on">Todos</button>
+        <button class="seg">Cartas</button>
+        <button class="seg">Dados</button>
+        <button class="seg">Tablero</button>
+      </div>
+    </div>
+    <div class="bento">
+      <div class="g feature">
+        <span class="state live"><i></i>3 salas</span>
+        <span class="glyph">♠ ♥ ♦ ♣</span>
+        <div><h4>Truco Argentino</h4><div class="meta">2 a 4 · envido, truco, vale cuatro · 30 puntos</div></div>
+      </div>
+      <div class="g span3 c2"><span class="state live"><i></i>1 sala</span><span class="glyph">⚄</span><h4>Generala</h4><div class="meta">2 a 6 · cinco dados</div></div>
+      <div class="g span2 c3"><span class="state">Activo</span><span class="glyph">♣</span><h4>Chinchón</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2"><span class="state">Activo</span><span class="glyph">♦</span><h4>Escoba de 15</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2 c2"><span class="state">Activo</span><span class="glyph">⊗</span><h4>Ta-Te-Ti</h4><div class="meta">2 · con bot</div></div>
+      <div class="g span2 c3"><span class="state">Activo</span><span class="glyph">❯</span><h4>Ahorcado</h4><div class="meta">1 a 4</div></div>
+      <div class="g span2"><span class="state">Pronto</span><span class="glyph">⚇</span><h4>Ludo</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2 locked"><span class="state">Bloqueado</span><span class="glyph">⚀</span><h4>Dudo</h4><div class="meta">2 a 6</div></div>
+    </div>
+  </section>
+
+  <section id="lobby">
+    <div class="sec-head"><h2>La sala de espera</h2></div>
+    <div class="lobby">
+      <div class="lobby-top">
+        <span class="t"><span class="live-tag">◔ en espera</span> Truco · <span class="code">TRUCO-7K2P</span></span>
+        <span style="color:var(--ink-3);font-size:13px">3 / 4</span>
+      </div>
+      <div class="lg">
+        <div class="seats">
+          <div class="seat host"><span class="pic">◈</span><span><span class="who">Sofía</span><br><span class="st ready">✓ lista</span></span></div>
+          <div class="seat"><span class="pic">♞</span><span><span class="who">Nacho</span><br><span class="st ready">✓ listo</span></span></div>
+          <div class="seat"><span class="pic">♟</span><span><span class="who">Vicky</span><br><span class="st">conectando…</span></span></div>
+          <div class="seat empty">＋ slot abierto</div>
+        </div>
+        <div class="share">
+          <div><label>Código</label><div class="field"><span class="v">TRUCO-7K2P</span><button class="copy" data-copy="TRUCO-7K2P">copiar</button></div></div>
+          <div><label>Enlace</label><div class="field"><span class="v link">aurora.games/t/TRUCO-7K2P</span><button class="copy" data-copy="https://aurora.games/t/TRUCO-7K2P">copiar</button></div></div>
+          <button class="wa">Compartir por WhatsApp ➜</button>
+          <button class="start">Empezar la partida ▷</button>
+          <p class="host-note">Solo la anfitriona puede iniciar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap foot">
+  <div>Aurora · minijuegos online</div>
+  <div>Assets bajo licencias libres — <a href="#">créditos</a></div>
+</div></footer>
+
+<script>
+// segmented
+const seg=document.getElementById('seg'),thumb=document.getElementById('thumb');
+function move(b){thumb.style.width=b.offsetWidth+'px';thumb.style.transform='translateX('+(b.offsetLeft-4)+'px)';}
+seg.querySelectorAll('.seg').forEach(b=>b.addEventListener('click',()=>{
+  seg.querySelectorAll('.seg').forEach(x=>x.classList.remove('on'));b.classList.add('on');move(b);
+}));
+addEventListener('load',()=>move(seg.querySelector('.on')));
+addEventListener('resize',()=>move(seg.querySelector('.on')));
+// copy
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);}catch(e){}
+  const t=b.textContent;b.textContent='copiado ✓';b.classList.add('done');
+  setTimeout(()=>{b.textContent=t;b.classList.remove('done');},1400);
+}));
+document.querySelector('.wa').addEventListener('click',()=>{
+  const txt=encodeURIComponent('Te invito a jugar al Truco ➜ https://aurora.games/t/TRUCO-7K2P');
+  window.open('https://wa.me/?text='+txt,'_blank');
+});
+</script>
+</body>
+</html>

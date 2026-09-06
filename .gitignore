@@ -1,0 +1,29 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+backend/.venv/
+.pytest_cache/
+.ruff_cache/
+
+# --- Node ---
+node_modules/
+
+# --- Build output (Vercel lo regenera con `npm run build:css`) ---
+frontend/public/app.css
+
+# --- Vercel / Supabase local ---
+.vercel/
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+
+# --- Env / secretos ---
+.env
+.env.*
+!.env.example
+
+# --- SO / editor ---
+.DS_Store
+Thumbs.db
+*.swp

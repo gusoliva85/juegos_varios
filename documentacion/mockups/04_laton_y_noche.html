@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 4 · Latón y Noche — Plataforma de Minijuegos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOCKUP 4 · "LATÓN Y NOCHE"
+   Casi negro, filigrana de latón, línea fina grabada, mono en datos.
+   Club privado / speakeasy. Glow mínimo, elegancia por contención.
+   ============================================================ */
+:root{
+  --night-0:#0a0b0d;
+  --night-1:#101215;
+  --night-2:#15181c;
+  --ink:#ece7dc;
+  --ink-2:#9c968a;
+  --ink-3:#645f56;
+  --brass:#b98f4a;
+  --brass-2:#d8b06a;
+  --brass-line:rgba(185,143,74,.32);
+  --brass-soft:rgba(185,143,74,.08);
+  --hair:rgba(236,231,220,.09);
+  --sh:0 30px 70px -30px rgba(0,0,0,.8);
+  --r:4px;
+  --ease:cubic-bezier(.22,1,.36,1);--dur:.4s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--night-0);min-height:100vh;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(1000px 600px at 50% -10%, var(--brass-soft), transparent 60%)}
+.mono{font-family:'IBM Plex Mono',monospace}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 26px}
+
+/* frame lines */
+.rule{height:1px;background:linear-gradient(90deg,transparent,var(--brass-line) 12%,var(--brass-line) 88%,transparent)}
+
+/* Topbar */
+header{position:sticky;top:0;z-index:20;background:rgba(10,11,13,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+.bar{display:flex;align-items:center;gap:22px;padding:16px 0}
+.brand{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:23px;letter-spacing:.02em;display:flex;align-items:center;gap:12px}
+.brand .cr{width:30px;height:30px;border:1px solid var(--brass-line);border-radius:50%;display:grid;place-items:center;color:var(--brass-2);font-size:14px}
+.nav{margin-left:auto;display:flex;gap:2px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:12px;letter-spacing:.08em;text-transform:uppercase;padding:9px 13px;transition:var(--dur) var(--ease)}
+.nav a:hover{color:var(--brass-2)}
+.status{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-2);letter-spacing:.05em;display:flex;align-items:center;gap:9px;
+  border:1px solid var(--brass-line);padding:7px 12px;border-radius:99px}
+.status i{width:6px;height:6px;border-radius:50%;background:var(--brass-2);box-shadow:0 0 8px var(--brass);animation:pulse 3s var(--ease) infinite}
+@keyframes pulse{50%{opacity:.3}}
+
+/* Hero */
+.hero{padding:90px 0 46px;text-align:center;max-width:820px;margin:0 auto}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--brass);
+  display:flex;align-items:center;justify-content:center;gap:14px}
+.eyebrow::before,.eyebrow::after{content:"";width:44px;height:1px;background:var(--brass-line)}
+h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(44px,7vw,80px);line-height:1.05;letter-spacing:.01em;margin:24px 0 20px}
+h1 em{font-style:italic;color:var(--brass-2)}
+.lead{color:var(--ink-2);font-size:16px;line-height:1.7;max-width:52ch;margin:0 auto}
+.cta-row{display:flex;gap:14px;justify-content:center;margin-top:34px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  font-weight:600;cursor:pointer;text-decoration:none;border-radius:var(--r);transition:var(--dur) var(--ease)}
+.btn.primary{background:linear-gradient(180deg,var(--brass-2),var(--brass));color:#17130b;
+  box-shadow:0 0 0 1px rgba(255,255,255,.12) inset,0 16px 40px -16px rgba(185,143,74,.55)}
+.btn.primary:hover{transform:translateY(-2px);box-shadow:0 0 0 1px rgba(255,255,255,.2) inset,0 24px 52px -16px rgba(185,143,74,.7)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--brass-line)}
+.btn.ghost:hover{transform:translateY(-2px);border-color:var(--brass);color:var(--brass-2)}
+
+/* suit divider row */
+.suits{display:flex;justify-content:center;gap:26px;margin:44px 0 8px;color:var(--ink-3);font-size:19px}
+.suits span:nth-child(odd){color:var(--brass)}
+
+/* Join */
+.join{margin:40px auto 70px;max-width:560px;border:1px solid var(--brass-line);border-radius:var(--r);
+  background:linear-gradient(180deg,var(--night-2),var(--night-1));box-shadow:var(--sh);overflow:hidden}
+.join .h{padding:16px 20px;border-bottom:1px solid var(--hair);font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;display:flex;justify-content:space-between;align-items:center}
+.join .h span{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3)}
+.join .b{display:flex;gap:12px;padding:20px}
+.join input{flex:1;padding:13px 15px;background:var(--night-0);border:1px solid var(--brass-line);border-radius:var(--r);
+  color:var(--ink);font-family:'IBM Plex Mono',monospace;letter-spacing:.16em;text-transform:uppercase;font-size:14px}
+.join input:focus{outline:0;border-color:var(--brass);box-shadow:0 0 0 3px var(--brass-soft)}
+.join .b button{padding:0 22px;border:0;border-radius:var(--r);background:linear-gradient(180deg,var(--brass-2),var(--brass));color:#17130b;font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:8px;transition:var(--dur) var(--ease)}
+.join .b button:hover{transform:translateY(-2px)}
+
+/* Section */
+.sec-head{text-align:center;margin:20px 0 30px}
+.sec-head .k{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;color:var(--brass)}
+.sec-head h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:34px;margin-top:8px}
+.filters{display:flex;justify-content:center;gap:8px;margin-top:16px;flex-wrap:wrap}
+.filters button{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--hair);color:var(--ink-2);padding:8px 14px;border-radius:99px;cursor:pointer;transition:var(--dur) var(--ease)}
+.filters button.on{border-color:var(--brass);color:var(--brass-2);background:var(--brass-soft)}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin:30px 0 64px}
+.g{position:relative;border:1px solid var(--hair);border-radius:var(--r);padding:22px;min-height:164px;cursor:pointer;overflow:hidden;
+  background:linear-gradient(180deg,var(--night-1),var(--night-0));
+  display:flex;flex-direction:column;justify-content:space-between;transition:var(--dur) var(--ease)}
+.g::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px var(--brass-line);opacity:0;transition:var(--dur) var(--ease)}
+.g:hover{transform:translateY(-3px)}
+.g:hover::after{opacity:1}
+.g .glyph{font-family:'Cormorant Garamond',serif;font-size:32px;color:var(--brass-2)}
+.g h4{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:21px;margin-top:auto}
+.g .meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;color:var(--ink-3);margin-top:6px}
+.g .state{position:absolute;top:18px;right:18px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.state.live{color:var(--brass-2)}
+.g.span3{grid-column:span 3}.g.span2{grid-column:span 2}
+.g.feature{grid-column:span 3;min-height:236px}
+.g.feature h4{font-size:30px}.g.feature .glyph{font-size:40px;letter-spacing:10px}
+.g.locked{opacity:.38;cursor:not-allowed}
+.g .no{position:absolute;top:18px;left:20px;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-3)}
+
+/* Lobby */
+.lobby{max-width:940px;margin:0 auto 66px;border:1px solid var(--brass-line);border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(180deg,var(--night-2),var(--night-1));box-shadow:var(--sh)}
+.lobby-top{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--hair);flex-wrap:wrap;gap:8px}
+.lobby-top .t{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600}
+.lobby-top .code{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--brass-2);letter-spacing:.08em}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-2);border:1px solid var(--brass-line);padding:3px 8px;border-radius:99px}
+.lg{display:grid;grid-template-columns:1.15fr 1fr}
+.seats{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:11px;border-right:1px solid var(--hair)}
+.seat{display:flex;align-items:center;gap:11px;padding:13px;border:1px solid var(--hair);border-radius:var(--r)}
+.seat .pic{width:34px;height:34px;border-radius:50%;border:1px solid var(--brass-line);display:grid;place-items:center;color:var(--brass-2);font-family:'Cormorant Garamond',serif;font-size:15px}
+.seat .who{font-size:13.5px;font-weight:600}
+.seat .st{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink-3)}
+.seat .st.ready{color:var(--brass-2)}
+.seat.empty{border-style:dashed;justify-content:center;color:var(--ink-3);font-family:'IBM Plex Mono',monospace;font-size:11px}
+.seat.host .who::after{content:" · ANFITRIÓN";font-family:'IBM Plex Mono',monospace;font-size:8.5px;letter-spacing:.1em;color:var(--brass)}
+.share{padding:22px;display:flex;flex-direction:column;gap:12px}
+.share label{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.field{display:flex;align-items:center;gap:8px;padding:11px 13px;border:1px solid var(--brass-line);border-radius:var(--r);font-family:'IBM Plex Mono',monospace;font-size:12px}
+.field .v{flex:1;letter-spacing:.08em;color:var(--ink)}
+.field .v.link{letter-spacing:0;color:var(--ink-2)}
+.copy{background:transparent;border:1px solid var(--hair);color:var(--ink-2);border-radius:var(--r);padding:6px 10px;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:var(--dur) var(--ease)}
+.copy:hover{border-color:var(--brass);color:var(--brass-2)}
+.copy.done{color:var(--brass-2);border-color:var(--brass-line)}
+.wa{margin-top:2px;padding:13px;border:1px solid var(--brass-line);background:transparent;color:var(--ink);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;border-radius:var(--r);transition:var(--dur) var(--ease)}
+.wa:hover{border-color:var(--brass);color:var(--brass-2)}
+.start{margin-top:auto;padding:15px;border:0;border-radius:var(--r);background:linear-gradient(180deg,var(--brass-2),var(--brass));color:#17130b;font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:var(--dur) var(--ease)}
+.start:hover{transform:translateY(-2px)}
+.host-note{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--ink-3);text-align:center}
+
+footer{border-top:1px solid var(--hair);padding:34px 0 54px;color:var(--ink-3);font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer a{color:var(--ink-2);text-decoration:none}
+
+@media (max-width:980px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .g.span3,.g.span2,.g.feature{grid-column:span 2}
+  .lg{grid-template-columns:1fr}.seats{border-right:0;border-bottom:1px solid var(--hair)}
+  .nav a{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="cr">♠</span> Salón Latón</div>
+    <nav class="nav"><a href="#catalogo">Juegos</a><a href="#lobby">Salas</a><a href="#">Créditos</a></nav>
+    <span class="status"><i></i> 07 MESAS · 12 JUGADORES</span>
+  </div>
+</header>
+<div class="rule"></div>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Club de minijuegos</div>
+    <h1>Se abre una mesa.<br>Circula un <em>código</em>.<br>Empieza la partida.</h1>
+    <p class="lead">Truco, generala, escoba y más — para dos a cuatro. Creás la sala, pasás el código
+      por WhatsApp, y cuando el círculo está completo, das el arranque. Una sola estética para cada
+      carta y cada dado.</p>
+    <div class="cta-row">
+      <button class="btn primary">Crear sala rápida ▷</button>
+      <a href="#catalogo" class="btn ghost">Ver los juegos</a>
+    </div>
+    <div class="suits"><span>♠</span><span>♥</span><span>♦</span><span>♣</span><span>⚄</span></div>
+  </section>
+
+  <section class="join">
+    <div class="h">Entrar con código <span>Recibido por chat</span></div>
+    <div class="b">
+      <input type="text" placeholder="GENERALA-K3PQ" aria-label="Código de sala">
+      <button>Unirme ➜</button>
+    </div>
+  </section>
+
+  <section id="catalogo">
+    <div class="sec-head">
+      <div class="k">II · El catálogo</div>
+      <h2>Los juegos de la casa</h2>
+      <div class="filters"><button class="on">Todos</button><button>Cartas</button><button>Dados</button><button>Tablero</button><button>Palabras</button></div>
+    </div>
+    <div class="bento">
+      <div class="g feature">
+        <span class="no">01</span><span class="state live">◉ 3 salas en vivo</span>
+        <span class="glyph">♠ ♥ ♦ ♣</span>
+        <div><h4>Truco Argentino</h4><div class="meta">2–4 · con/sin flor · a 30</div></div>
+      </div>
+      <div class="g span3"><span class="no">02</span><span class="state live">◉ 1 sala</span><span class="glyph">⚄</span><h4>Generala</h4><div class="meta">2–6 · cinco dados</div></div>
+      <div class="g span2"><span class="no">03</span><span class="state">Activo</span><span class="glyph">♦</span><h4>Escoba de 15</h4><div class="meta">2–4</div></div>
+      <div class="g span2"><span class="no">04</span><span class="state">Activo</span><span class="glyph">♣</span><h4>Chinchón</h4><div class="meta">2–4</div></div>
+      <div class="g span2"><span class="no">05</span><span class="state">Activo</span><span class="glyph">⊗</span><h4>Ta-Te-Ti</h4><div class="meta">2 · con bot</div></div>
+      <div class="g span2"><span class="no">06</span><span class="state">Activo</span><span class="glyph">❯</span><h4>Ahorcado</h4><div class="meta">1–4</div></div>
+      <div class="g span2"><span class="no">07</span><span class="state">Pronto</span><span class="glyph">⚇</span><h4>Ludo</h4><div class="meta">2–4</div></div>
+      <div class="g span2 locked"><span class="no">08</span><span class="state">Bloqueado</span><span class="glyph">⚀</span><h4>Dudo</h4><div class="meta">2–6</div></div>
+    </div>
+  </section>
+
+  <section id="lobby">
+    <div class="sec-head"><div class="k">III · La antesala</div><h2>La sala de espera</h2></div>
+    <div class="lobby">
+      <div class="lobby-top">
+        <span class="t">Truco <span class="code">· TRUCO-7K2P</span></span>
+        <span style="display:flex;gap:8px;align-items:center"><span class="tag">En espera</span><span class="mono" style="color:var(--ink-3);font-size:11px">3/4</span></span>
+      </div>
+      <div class="lg">
+        <div class="seats">
+          <div class="seat host"><span class="pic">♠</span><span><span class="who">Sofía</span><br><span class="st ready">✓ lista</span></span></div>
+          <div class="seat"><span class="pic">♞</span><span><span class="who">Nacho</span><br><span class="st ready">✓ listo</span></span></div>
+          <div class="seat"><span class="pic">♟</span><span><span class="who">Vicky</span><br><span class="st">conectando…</span></span></div>
+          <div class="seat empty">＋ lugar libre</div>
+        </div>
+        <div class="share">
+          <div><label>Código</label><div class="field"><span class="v">TRUCO-7K2P</span><button class="copy" data-copy="TRUCO-7K2P">copiar</button></div></div>
+          <div><label>Enlace</label><div class="field"><span class="v link">salonlaton.club/t/TRUCO-7K2P</span><button class="copy" data-copy="https://salonlaton.club/t/TRUCO-7K2P">copiar</button></div></div>
+          <button class="wa">Compartir por WhatsApp ➜</button>
+          <button class="start">Empezar la partida ▷</button>
+          <p class="host-note">Solo la anfitriona puede iniciar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<div class="rule"></div>
+<footer><div class="wrap foot">
+  <div>SALÓN LATÓN — MINIJUEGOS ONLINE · MMXXVI</div>
+  <div>NAIPES Y SONIDOS · LICENCIAS LIBRES · <a href="#">CRÉDITOS</a></div>
+</div></footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+}));
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);}catch(e){}
+  const t=b.textContent;b.textContent='copiado ✓';b.classList.add('done');
+  setTimeout(()=>{b.textContent=t;b.classList.remove('done');},1400);
+}));
+document.querySelector('.wa').addEventListener('click',()=>{
+  const txt=encodeURIComponent('Te invito a jugar al Truco ➜ https://salonlaton.club/t/TRUCO-7K2P');
+  window.open('https://wa.me/?text='+txt,'_blank');
+});
+</script>
+</body>
+</html>

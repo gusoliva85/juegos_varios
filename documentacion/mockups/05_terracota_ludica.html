@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mockup 5 · Terracota Lúdica — Plataforma de Minijuegos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   MOCKUP 5 · "TERRACOTA LÚDICA"
+   Caja de juego de mesa moderna: terracota, crema, mostaza, verde-agua.
+   Formas redondeadas con carácter, sombras cálidas, alegre pero fino.
+   Sin degradé violeta, sin neón.
+   ============================================================ */
+:root{
+  --cream:#f6efe2;
+  --cream-2:#efe5d2;
+  --paper:#fffaf0;
+  --ink:#2b2320;
+  --ink-2:#6a5d54;
+  --ink-3:#9a8a7d;
+  --terra:#d9683f;
+  --terra-2:#c5552f;
+  --mustard:#e0a83e;
+  --teal:#2f8f81;
+  --berry:#a6425e;
+  --line:#2b2320;
+  --hair:rgba(43,35,32,.12);
+  --sh-hard:4px 4px 0 var(--line);
+  --sh-soft:0 10px 30px -12px rgba(43,35,32,.28);
+  --r-lg:26px;--r-md:18px;--r-sm:12px;
+  --ease:cubic-bezier(.22,1,.36,1);--dur:.28s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--cream);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(circle at 12% 8%, rgba(224,168,62,.14), transparent 40%),
+             radial-gradient(circle at 90% 0%, rgba(47,143,129,.12), transparent 42%)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* Topbar */
+header{position:sticky;top:0;z-index:20;background:rgba(246,239,226,.9);backdrop-filter:blur(10px);border-bottom:2px solid var(--line)}
+.bar{display:flex;align-items:center;gap:20px;padding:13px 0}
+.brand{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.brand .b{width:34px;height:34px;border-radius:11px;border:2px solid var(--line);background:var(--terra);color:var(--paper);display:grid;place-items:center;font-size:16px;box-shadow:var(--sh-hard);transform:rotate(-4deg)}
+.nav{margin-left:auto;display:flex;gap:4px}
+.nav a{color:var(--ink-2);text-decoration:none;font-size:14px;font-weight:600;padding:8px 12px;border-radius:9px;transition:var(--dur) var(--ease)}
+.nav a:hover{color:var(--ink);background:var(--cream-2)}
+.live{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;border:2px solid var(--line);border-radius:99px;padding:6px 13px;background:var(--paper);box-shadow:var(--sh-hard)}
+.live i{width:8px;height:8px;border-radius:50%;background:var(--teal);animation:bob 1.6s var(--ease) infinite}
+@keyframes bob{50%{transform:scale(.5)}}
+
+/* Hero */
+.hero{padding:64px 0 40px;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:13px;background:var(--mustard);color:var(--ink);
+  border:2px solid var(--line);border-radius:99px;padding:6px 14px;box-shadow:var(--sh-hard);transform:rotate(-1.5deg)}
+h1{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:clamp(40px,5.6vw,64px);line-height:1.02;letter-spacing:-.025em;margin:20px 0 16px}
+h1 mark{background:var(--terra);color:var(--paper);padding:0 .12em;border-radius:8px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.lead{font-size:16.5px;line-height:1.6;color:var(--ink-2);max-width:44ch}
+.cta-row{display:flex;gap:13px;margin-top:26px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:14px 22px;font-weight:700;font-size:14.5px;cursor:pointer;
+  border:2px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);background:var(--paper);
+  box-shadow:var(--sh-hard);transition:var(--dur) var(--ease)}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--line)}
+.btn.primary{background:var(--terra);color:var(--paper)}
+
+/* board tiles cluster */
+.cluster{position:relative;height:330px}
+.tile{position:absolute;border:2px solid var(--line);border-radius:20px;box-shadow:var(--sh-hard);
+  display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
+  transition:transform .35s var(--ease)}
+.tile.t1{width:150px;height:196px;left:8px;top:40px;background:var(--paper);color:var(--terra);font-size:62px;transform:rotate(-8deg)}
+.tile.t2{width:132px;height:132px;right:18px;top:0;background:var(--teal);color:var(--paper);font-size:46px;transform:rotate(7deg)}
+.tile.t3{width:120px;height:120px;right:0;bottom:24px;background:var(--mustard);color:var(--ink);font-size:44px;transform:rotate(-5deg)}
+.tile.t4{width:104px;height:104px;left:120px;bottom:0;background:var(--berry);color:var(--paper);font-size:40px;transform:rotate(9deg)}
+.cluster:hover .tile.t1{transform:rotate(-11deg) translateY(-6px)}
+.cluster:hover .tile.t2{transform:rotate(10deg) translateY(-6px)}
+.cluster:hover .tile.t3{transform:rotate(-8deg) translateY(-4px)}
+.cluster:hover .tile.t4{transform:rotate(12deg) translateY(-4px)}
+
+@media (max-width:980px){.hero{grid-template-columns:1fr}.cluster{order:-1;height:280px}}
+
+/* Join */
+.join{margin:6px 0 60px;padding:20px;border:2px solid var(--line);border-radius:var(--r-lg);background:var(--paper);
+  box-shadow:var(--sh-soft);display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.join h3{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:17px}
+.join p{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.join input{padding:13px 15px;border:2px solid var(--line);border-radius:12px;background:var(--cream);font:inherit;
+  font-weight:700;letter-spacing:.13em;text-transform:uppercase;width:100%}
+.join input:focus{outline:0;box-shadow:var(--sh-hard)}
+
+/* Section */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin:14px 0 22px;flex-wrap:wrap;gap:12px}
+.sec-head h2{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:28px;letter-spacing:-.02em}
+.filters{display:flex;gap:7px;flex-wrap:wrap}
+.filters button{font-size:13px;font-weight:700;border:2px solid var(--line);border-radius:99px;padding:7px 14px;background:var(--paper);cursor:pointer;transition:var(--dur) var(--ease)}
+.filters button.on{background:var(--ink);color:var(--cream)}
+.filters button:hover{transform:translateY(-2px)}
+
+/* Bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-bottom:64px}
+.g{position:relative;border:2px solid var(--line);border-radius:var(--r-md);padding:20px;min-height:158px;cursor:pointer;
+  background:var(--paper);box-shadow:var(--sh-hard);display:flex;flex-direction:column;justify-content:space-between;transition:var(--dur) var(--ease)}
+.g:hover{transform:translate(-3px,-3px);box-shadow:7px 7px 0 var(--line)}
+.g .glyph{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px}
+.g h4{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:18px;margin-top:auto}
+.g .meta{font-size:12px;color:var(--ink-3);margin-top:5px;font-weight:500}
+.g .state{position:absolute;top:15px;right:15px;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+  border:2px solid var(--line);border-radius:99px;padding:3px 9px;background:var(--cream)}
+.state.live{background:var(--teal);color:var(--paper)}
+.state.soon{background:var(--mustard)}
+.g.span3{grid-column:span 3}.g.span2{grid-column:span 2}
+.g.feature{grid-column:span 3;min-height:228px;background:var(--terra);color:var(--paper)}
+.g.feature .meta{color:rgba(255,250,240,.8)}
+.g.feature .state{background:var(--paper);color:var(--ink)}
+.g.feature h4{font-size:24px}
+.g.c-teal{background:var(--teal);color:var(--paper)}.g.c-teal .meta{color:rgba(255,250,240,.8)}
+.g.c-mustard{background:var(--mustard)}
+.g.c-berry{background:var(--berry);color:var(--paper)}.g.c-berry .meta{color:rgba(255,250,240,.8)}
+.g.locked{opacity:.5;cursor:not-allowed}
+.g.locked .state{background:var(--cream-2)}
+
+/* Lobby */
+.lobby{border:2px solid var(--line);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-soft);background:var(--paper);margin-bottom:64px}
+.lobby-top{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-bottom:2px solid var(--line);background:var(--cream);flex-wrap:wrap;gap:8px}
+.lobby-top .t{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:16px}
+.lobby-top .code{color:var(--terra-2)}
+.tag{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--line);border-radius:99px;padding:3px 9px;background:var(--mustard)}
+.lg{display:grid;grid-template-columns:1.15fr 1fr}
+.seats{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px;border-right:2px solid var(--line)}
+.seat{display:flex;align-items:center;gap:11px;padding:12px;border:2px solid var(--line);border-radius:14px;background:var(--cream)}
+.seat .pic{width:36px;height:36px;border-radius:11px;border:2px solid var(--line);display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px;background:var(--paper)}
+.seat:nth-child(1) .pic{background:var(--terra);color:var(--paper)}
+.seat:nth-child(2) .pic{background:var(--teal);color:var(--paper)}
+.seat:nth-child(3) .pic{background:var(--mustard)}
+.seat .who{font-size:13.5px;font-weight:700}
+.seat .st{font-size:11px;color:var(--ink-3);font-weight:500}
+.seat .st.ready{color:var(--teal);font-weight:700}
+.seat.empty{justify-content:center;border-style:dashed;color:var(--ink-3);font-size:12px;font-weight:600}
+.seat.host .who::after{content:" ★";color:var(--terra-2)}
+.share{padding:22px;display:flex;flex-direction:column;gap:12px}
+.share label{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.field{display:flex;align-items:center;gap:8px;padding:11px 13px;border:2px solid var(--line);border-radius:12px;font-size:13px;background:var(--cream)}
+.field .v{flex:1;font-weight:800;letter-spacing:.06em}
+.field .v.link{letter-spacing:0;font-weight:600;color:var(--ink-2)}
+.copy{border:2px solid var(--line);background:var(--paper);font-size:11px;font-weight:700;padding:5px 10px;border-radius:9px;cursor:pointer;transition:var(--dur) var(--ease)}
+.copy:hover{transform:translateY(-2px)}
+.copy.done{background:var(--teal);color:var(--paper)}
+.wa{padding:13px;border:2px solid var(--line);border-radius:12px;background:var(--teal);color:var(--paper);font-weight:800;font-size:13.5px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;box-shadow:var(--sh-hard);transition:var(--dur) var(--ease)}
+.wa:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.start{margin-top:auto;padding:15px;border:2px solid var(--line);border-radius:12px;background:var(--terra);color:var(--paper);font-weight:800;font-size:14.5px;cursor:pointer;box-shadow:var(--sh-hard);transition:var(--dur) var(--ease)}
+.start:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--line)}
+.host-note{font-size:11px;color:var(--ink-3);text-align:center;font-weight:500}
+
+footer{border-top:2px solid var(--line);padding:30px 0 50px;font-size:13px;color:var(--ink-2);font-weight:500}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px}
+footer a{color:var(--terra-2);text-decoration:none;font-weight:700}
+
+@media (max-width:980px){
+  .join{grid-template-columns:1fr}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .g.span3,.g.span2,.g.feature{grid-column:span 2}
+  .lg{grid-template-columns:1fr}.seats{border-right:0;border-bottom:2px solid var(--line)}
+  .nav a{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="brand"><span class="b">◈</span> Mesa &amp; Ficha</div>
+    <nav class="nav"><a href="#catalogo">Juegos</a><a href="#lobby">Salas</a><a href="#">Créditos</a></nav>
+    <span class="live"><i></i> 7 salas activas</span>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <span class="badge">◉ sin descargar nada</span>
+      <h1>Abrí la mesa,<br>pasá el <mark>código</mark>,<br>que jueguen todos.</h1>
+      <p class="lead">Truco, generala, escoba, ta-te-ti y más. Para dos a cuatro. Compartís el código
+        por WhatsApp y cuando están todos, el anfitrión aprieta arrancar.</p>
+      <div class="cta-row">
+        <button class="btn primary">Crear sala rápida ▷</button>
+        <a href="#catalogo" class="btn">Ver los juegos</a>
+      </div>
+    </div>
+    <div class="cluster">
+      <div class="tile t1">♠</div>
+      <div class="tile t2">⚄</div>
+      <div class="tile t3">♦</div>
+      <div class="tile t4">⚇</div>
+    </div>
+  </section>
+
+  <section class="join">
+    <div><h3>¿Te pasaron un código?</h3><p>Pegalo y entrás a la sala de espera.</p></div>
+    <input type="text" placeholder="LUDO-M4XQ" aria-label="Código de sala">
+    <button class="btn primary">Unirme ➜</button>
+  </section>
+
+  <section id="catalogo">
+    <div class="sec-head">
+      <h2>Elegí tu juego</h2>
+      <div class="filters"><button class="on">Todos</button><button>Cartas</button><button>Dados</button><button>Tablero</button><button>Palabras</button></div>
+    </div>
+    <div class="bento">
+      <div class="g feature">
+        <span class="state live">◉ 3 salas</span>
+        <span class="glyph">♠ ♥ ♦ ♣</span>
+        <div><h4>Truco Argentino</h4><div class="meta">2 a 4 · con y sin flor · a 30 puntos</div></div>
+      </div>
+      <div class="g span3 c-teal"><span class="state live">◉ 1 sala</span><span class="glyph">⚄</span><h4>Generala</h4><div class="meta">2 a 6 · cinco dados</div></div>
+      <div class="g span2 c-mustard"><span class="state">Activo</span><span class="glyph">♦</span><h4>Escoba de 15</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2"><span class="state">Activo</span><span class="glyph">♣</span><h4>Chinchón</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2 c-berry"><span class="state">Activo</span><span class="glyph">⊗</span><h4>Ta-Te-Ti</h4><div class="meta">2 · con bot</div></div>
+      <div class="g span2"><span class="state">Activo</span><span class="glyph">❯</span><h4>Ahorcado</h4><div class="meta">1 a 4</div></div>
+      <div class="g span2"><span class="state soon">Pronto</span><span class="glyph">⚇</span><h4>Ludo</h4><div class="meta">2 a 4</div></div>
+      <div class="g span2 locked"><span class="state">Bloqueado</span><span class="glyph">⚀</span><h4>Dudo</h4><div class="meta">2 a 6</div></div>
+    </div>
+  </section>
+
+  <section id="lobby">
+    <div class="sec-head"><h2>La sala de espera</h2></div>
+    <div class="lobby">
+      <div class="lobby-top">
+        <span class="t">Truco · <span class="code">TRUCO-7K2P</span></span>
+        <span style="display:flex;gap:8px;align-items:center"><span class="tag">En espera</span><span style="color:var(--ink-3);font-size:12px;font-weight:700">3 / 4</span></span>
+      </div>
+      <div class="lg">
+        <div class="seats">
+          <div class="seat host"><span class="pic">◈</span><span><span class="who">Sofía</span><br><span class="st ready">✓ lista</span></span></div>
+          <div class="seat"><span class="pic">♞</span><span><span class="who">Nacho</span><br><span class="st ready">✓ listo</span></span></div>
+          <div class="seat"><span class="pic">♟</span><span><span class="who">Vicky</span><br><span class="st">esperando…</span></span></div>
+          <div class="seat empty">＋ silla libre</div>
+        </div>
+        <div class="share">
+          <div><label>Código para dictar</label><div class="field"><span class="v">TRUCO-7K2P</span><button class="copy" data-copy="TRUCO-7K2P">copiar</button></div></div>
+          <div><label>Enlace directo</label><div class="field"><span class="v link">mesayficha.club/t/TRUCO-7K2P</span><button class="copy" data-copy="https://mesayficha.club/t/TRUCO-7K2P">copiar</button></div></div>
+          <button class="wa">Compartir por WhatsApp ➜</button>
+          <button class="start">Empezar la partida ▷</button>
+          <p class="host-note">Solo la anfitriona puede iniciar</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap foot">
+  <div>Mesa &amp; Ficha · minijuegos online para jugar con amigos</div>
+  <div>Cartas, dados y sonidos con licencias libres · <a href="#">créditos</a></div>
+</div></footer>
+
+<script>
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+}));
+document.querySelectorAll('.copy').forEach(b=>b.addEventListener('click',async()=>{
+  try{await navigator.clipboard.writeText(b.dataset.copy);}catch(e){}
+  const t=b.textContent;b.textContent='copiado ✓';b.classList.add('done');
+  setTimeout(()=>{b.textContent=t;b.classList.remove('done');},1400);
+}));
+document.querySelector('.wa').addEventListener('click',()=>{
+  const txt=encodeURIComponent('Te invito a jugar al Truco ➜ https://mesayficha.club/t/TRUCO-7K2P');
+  window.open('https://wa.me/?text='+txt,'_blank');
+});
+</script>
+</body>
+</html>
