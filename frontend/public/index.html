@@ -124,6 +124,28 @@
           </div>
         </div>
       </section>
+
+      <!-- ============ Unirse con código (F0.3.4) ============ -->
+      <section
+        class="panel !shadow-soft p-5 grid gap-4 md:grid-cols-[auto_1fr_auto] md:items-center mt-2 mb-6"
+      >
+        <div>
+          <h3 class="font-display font-extrabold text-[17px]">¿Te pasaron un código?</h3>
+          <p class="text-ink-3 text-[12.5px] mt-0.5">Pegalo y entrás a la sala de espera.</p>
+        </div>
+        <input
+          class="field"
+          placeholder="CHIN-7K2P"
+          aria-label="Código de sala"
+          inputmode="text"
+          autocapitalize="characters"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="12"
+          data-join-code
+        />
+        <button type="button" class="btn btn-primary btn-full" data-join-submit>Unirme ➜</button>
+      </section>
     </main>
 
     <script type="module" src="/js/ui/shell.js"></script>

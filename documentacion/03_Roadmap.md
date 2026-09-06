@@ -64,7 +64,7 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 
 - [x] **F0.3.1** · [Frontend] `index.html` — topbar responsive (marca, `pill`, enlaces `hidden md:flex`, botón menú `md:hidden`). → *Prueba (preview):* 375px muestra el botón menú; 1280px los enlaces. · *Aprobada (push `8536151`).*
 - [x] **F0.3.2** · [Frontend] `bottom-nav` (`md:hidden`) + menú-hoja (`animate-slide-up`, backdrop `bg-ink/20`). `js/ui/shell.js`. Stubs `creditos.html`/`perfil.html`. → *Prueba (preview):* mobile muestra la barra inferior; desktop no. · *Aprobada (push `0c76161`).*
-- [ ] **F0.3.3** · [Frontend] Hero (badge rotado, `<h1>` con `<mark>`, 2 CTA `btn-full`, cluster de 4 tiles rotadas con hover; en mobile el cluster arriba). → *Prueba (preview):* coincide con el mockup; sin scroll horizontal en 360px.
+- [x] **F0.3.3** · [Frontend] Hero (badge rotado, `<h1>` con `<mark>`, 2 CTA `btn-full`, cluster de 4 tiles rotadas con hover; en mobile el cluster arriba). `html{overflow-x:clip}` como guard. → *Prueba (preview):* coincide con el mockup; sin scroll horizontal en 360px. · *Aprobada (push `ed7f7a2`).*
 - [ ] **F0.3.4** · [Frontend] Módulo "unirse con código" (visual). → *Prueba (preview):* igual al mockup en mobile y web.
 - [ ] **F0.3.5** · [Frontend] Bento del catálogo con **datos hardcodeados** — los 4 juegos (Ta-Te-Ti destacado, 2 jug.; Chinchón, Ahorcado, Batalla Naval, 2–4; todos "Próximamente"). Grilla `grid-cols-2 md:grid-cols-4 xl:grid-cols-6`. → *Prueba (preview):* en desktop las 4 tarjetas aprovechan el ancho sin ensancharse; en mobile 2 columnas.
 - [ ] **F0.3.6** · [Frontend] Footer + enlace a `creditos.html`. → *Prueba (preview):* visible, navega.
