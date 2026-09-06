@@ -6,51 +6,54 @@ pantalla. Todo sale de `documentacion/mockups/05_terracota_ludica.html`. Las cla
 
 ---
 
-## Shell responsive (topbar + bottom-nav)
+## Shell responsive (topbar + menú único)
 
-Regla: **mobile** = topbar compacta + `bottom-nav` fija. **Web (≥ md)** = topbar con enlaces, `bottom-nav`
-oculta (`md:hidden`).
+Regla: **una sola navegación en todos los tamaños** — el botón `☰` de la topbar abre el **menú-hoja**.
+No hay bottom-nav ni enlaces sueltos en la topbar. La topbar es: marca · `pill` de estado · `☰`.
 
 ```html
 <!-- Topbar -->
 <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
   <div class="container max-w-[1160px] flex items-center gap-4 py-3">
-    <a href="/" class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5">
+    <a href="/" class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5 shrink-0">
       <span class="w-9 h-9 grid place-items-center rounded-[11px] border-2 border-ink bg-terra text-paper
                    text-base shadow-hard -rotate-3">◈</span>
       Mesa &amp; Ficha
     </a>
-
-    <!-- enlaces: solo visibles en web -->
-    <nav class="ml-auto hidden md:flex gap-1">
-      <a href="#catalogo" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Juegos</a>
-      <a href="#lobby"    class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Salas</a>
-      <a href="/creditos" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Créditos</a>
-    </nav>
-
-    <!-- estado en vivo: siempre; en mobile queda a la derecha -->
-    <span class="pill ml-auto md:ml-2"><span class="dot"></span> 7 salas</span>
-
-    <!-- botón menú: solo mobile -->
-    <button class="md:hidden btn !p-2 !shadow-hard-sm" aria-label="Menú" data-sheet="menu">☰</button>
+    <span class="pill ml-auto"><span class="dot"></span> en línea</span>
+    <button class="btn !p-2 !shadow-hard-sm" aria-label="Abrir menú"
+            aria-expanded="false" aria-controls="menu-sheet" data-sheet="menu">☰</button>
   </div>
 </header>
 
-<!-- Bottom nav: solo mobile -->
-<nav class="bottom-nav" aria-label="Navegación">
-  <a href="/"          aria-current="page"><span class="text-lg leading-none">◈</span>Inicio</a>
-  <a href="#catalogo"><span class="text-lg leading-none">♠</span>Juegos</a>
-  <a href="#lobby"><span class="text-lg leading-none">⚇</span>Salas</a>
-  <a href="/perfil"><span class="text-lg leading-none">★</span>Perfil</a>
-</nav>
+<!-- Menú-hoja: hoja inferior en mobile, panel arriba-derecha en ≥ md -->
+<div id="menu-sheet" hidden>
+  <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
+  <div class="fixed inset-x-0 bottom-0 z-50 border-t-2 border-ink bg-cream p-5
+              pb-[calc(1.25rem+env(safe-area-inset-bottom))] animate-slide-up
+              md:inset-x-auto md:right-4 md:top-[68px] md:bottom-auto md:w-[300px]
+              md:rounded-lg md:border-2 md:shadow-soft-lg"
+       role="dialog" aria-modal="true" aria-label="Menú">
+    <div class="mx-auto max-w-[420px] flex flex-col gap-2">
+      <div class="flex items-center justify-between mb-1">
+        <span class="font-display font-extrabold text-lg">Menú</span>
+        <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
+      </div>
+      <a href="/" class="btn w-full">Inicio</a>
+      <a href="#catalogo" class="btn w-full">Juegos</a>
+      <a href="/creditos.html" class="btn w-full">Créditos</a>
+      <a href="/perfil.html" class="btn btn-primary w-full">Mi perfil</a>
+    </div>
+  </div>
+</div>
 
-<!-- el <main> lleva padding-bottom en mobile para no quedar tapado por la bottom-nav -->
-<main class="container max-w-[1160px] pb-24 md:pb-12"> … </main>
+<main class="container max-w-[1160px] pb-16 md:pb-20"> … </main>
 ```
 
-- **Nunca** dejar la `bottom-nav` visible en desktop, ni la topbar sin enlaces en desktop.
-- El menú-hoja (mobile) sube desde abajo con `animate-slide-up`, backdrop translúcido que cierra al tocar
-  afuera (no oscurecido a negro pleno: `bg-ink/20`).
+- El menú lo maneja `frontend/public/js/ui/shell.js`: abrir/cerrar, backdrop `bg-ink/20` que cierra al tocar
+  afuera, `Escape`, trampa de foco mínima, y `overflow-hidden` en `<html>` mientras está abierto.
+- **No hay bottom-nav ni footer.** Toda la navegación vive en el menú-hoja. (Se sacó por decisión del
+  cliente — menos cromo, una sola forma de navegar.)
 
 ---
 

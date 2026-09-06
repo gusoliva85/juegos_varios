@@ -174,16 +174,6 @@ module.exports = {
            px-3.5 py-1.5 text-[13px] font-bold shadow-hard -rotate-1;
   }
 
-  /* ---------- Bottom nav (solo mobile) ---------- */
-  .bottom-nav{
-    @apply md:hidden fixed inset-x-0 bottom-0 z-40 border-t-2 border-ink bg-cream/95 backdrop-blur
-           grid grid-cols-4 pb-[env(safe-area-inset-bottom)];
-  }
-  .bottom-nav a{
-    @apply flex flex-col items-center gap-0.5 py-2 text-[11px] font-bold text-ink-3;
-  }
-  .bottom-nav a[aria-current="page"]{ @apply text-terra-2; }
-
   /* ---------- Asiento del lobby ---------- */
   .seat{
     @apply flex items-center gap-3 border-2 border-ink rounded-[14px] bg-cream-2 p-3;

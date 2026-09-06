@@ -1,5 +1,6 @@
-// shell.js — cascarón del portal: menú-hoja (mobile) que abre el botón ☰.
-// La topbar y la bottom-nav son CSS puro (responsive). Este módulo solo maneja la hoja.
+// shell.js — cascarón del portal: menú-hoja que abre el botón ☰ (única navegación).
+// La topbar es CSS puro. Este módulo solo maneja la hoja: abrir/cerrar, backdrop,
+// Escape, trampa de foco y scroll-lock.
 
 const sheet = document.getElementById("menu-sheet");
 if (sheet) {
