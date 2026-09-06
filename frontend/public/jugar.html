@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sala · Mesa &amp; Ficha</title>
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <!-- ============ Topbar (mismo shell que el portal) ============ -->
+    <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
+      <div class="container max-w-[1160px] flex items-center gap-4 py-3">
+        <a
+          href="/"
+          class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5 shrink-0"
+        >
+          <span
+            class="w-9 h-9 grid place-items-center rounded-[11px] border-2 border-ink bg-terra text-paper text-base shadow-hard -rotate-3"
+            aria-hidden="true"
+            >◈</span
+          >
+          Mesa &amp; Ficha
+        </a>
+        <span class="pill ml-auto"><span class="dot"></span> en la sala</span>
+        <button
+          class="btn !p-2 !shadow-hard-sm"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu-sheet"
+          data-sheet="menu"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ Menú-hoja ============ -->
+    <div id="menu-sheet" hidden>
+      <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
+      <div
+        class="fixed inset-x-0 bottom-0 z-50 border-t-2 border-ink bg-cream p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] animate-slide-up md:inset-x-auto md:right-4 md:top-[68px] md:bottom-auto md:w-[300px] md:rounded-lg md:border-2 md:shadow-soft-lg"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú"
+      >
+        <div class="mx-auto max-w-[420px] flex flex-col gap-2">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-display font-extrabold text-lg">Menú</span>
+            <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
+          </div>
+          <a href="/" class="btn w-full">Inicio</a>
+          <a href="/#catalogo" class="btn w-full">Juegos</a>
+          <a href="/creditos.html" class="btn w-full">Créditos</a>
+          <a href="/perfil.html" class="btn btn-primary w-full">Mi perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="container max-w-[1160px] pb-16 md:pb-20 pt-6">
+      <!-- ============ Cabecera de sala ============ -->
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <a href="/#catalogo" class="btn !p-2 !shadow-hard-sm" aria-label="Salir de la sala">‹</a>
+          <div>
+            <h1 class="font-display font-extrabold text-lg leading-tight">
+              Chinchón · <span class="text-terra-2">CHIN-7K2P</span>
+            </h1>
+            <p class="text-ink-3 text-xs">Sala de espera</p>
+          </div>
+        </div>
+        <span class="flex items-center gap-2">
+          <span class="badge-state badge-wait">En espera</span>
+          <span class="text-ink-3 text-xs font-bold">3 / 4</span>
+        </span>
+      </div>
+
+      <!-- ============ Lobby (sala de espera) ============ -->
+      <div class="panel mb-6">
+        <div class="grid lg:grid-cols-[1.15fr_1fr]">
+          <!-- Asientos -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-5 border-b-2 border-ink lg:border-b-0 lg:border-r-2 lg:border-ink"
+          >
+            <p class="sm:col-span-2 text-[11px] font-extrabold uppercase tracking-[.08em] text-ink-3">
+              Jugadores
+            </p>
+            <div class="seat">
+              <span class="pic bg-terra text-paper" aria-hidden="true">◈</span>
+              <span>
+                <span class="font-bold text-[13.5px]">Sofía <span class="text-terra-2" title="anfitriona">★</span></span
+                ><br /><span class="text-teal text-[11px] font-bold">✓ lista</span>
+              </span>
+            </div>
+            <div class="seat">
+              <span class="pic bg-teal text-paper" aria-hidden="true">♞</span>
+              <span>
+                <span class="font-bold text-[13.5px]">Nacho</span><br /><span
+                  class="text-teal text-[11px] font-bold"
+                  >✓ listo</span
+                >
+              </span>
+            </div>
+            <div class="seat">
+              <span class="pic bg-mustard" aria-hidden="true">♟</span>
+              <span>
+                <span class="font-bold text-[13.5px]">Vicky</span><br /><span class="text-ink-3 text-[11px]"
+                  >conectando…</span
+                >
+              </span>
+            </div>
+            <div class="seat seat--empty">＋ silla libre</div>
+          </div>
+
+          <!-- Compartir + iniciar -->
+          <div class="flex flex-col gap-3 p-5">
+            <div>
+              <label class="text-[11px] font-extrabold uppercase tracking-[.08em] text-ink-3"
+                >Código para dictar</label
+              >
+              <div
+                class="flex items-center gap-2 border-2 border-ink rounded-sm bg-cream-2 px-3 py-2.5 text-[13px] mt-1"
+              >
+                <span class="flex-1 font-extrabold tracking-[.06em]">CHIN-7K2P</span>
+                <button
+                  type="button"
+                  class="btn !py-1.5 !px-2.5 !text-[11px] !shadow-hard-sm"
+                  data-copy="CHIN-7K2P"
+                >
+                  copiar
+                </button>
+              </div>
+            </div>
+            <div>
+              <label class="text-[11px] font-extrabold uppercase tracking-[.08em] text-ink-3"
+                >Enlace directo</label
+              >
+              <div
+                class="flex items-center gap-2 border-2 border-ink rounded-sm bg-cream-2 px-3 py-2.5 text-[13px] mt-1"
+              >
+                <span class="flex-1 font-semibold text-ink-2 truncate">…/jugar.html?sala=CHIN-7K2P</span>
+                <button
+                  type="button"
+                  class="btn !py-1.5 !px-2.5 !text-[11px] !shadow-hard-sm"
+                  data-copy="/jugar.html?sala=CHIN-7K2P"
+                >
+                  copiar
+                </button>
+              </div>
+            </div>
+            <button
+              type="button"
+              class="btn btn-teal w-full"
+              data-wa
+              data-wa-text="Te invito a jugar al Chinchón ➜ /jugar.html?sala=CHIN-7K2P"
+            >
+              Compartir por WhatsApp ➜
+            </button>
+            <button type="button" class="btn btn-primary w-full mt-auto">Empezar la partida ▷</button>
+            <p class="text-ink-3 text-[11px] text-center">Solo la anfitriona puede iniciar</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ Placeholder de la vista de partida ============ -->
+      <div class="border-2 border-dashed border-ink/40 rounded-lg p-8 text-center text-ink-3">
+        <div class="font-display font-extrabold text-2xl text-ink" aria-hidden="true">▷</div>
+        <p class="text-sm mt-2 font-semibold text-ink-2">Vista de partida</p>
+        <p class="text-xs mt-1 max-w-[46ch] mx-auto">
+          Cuando la anfitriona toca <b>"Empezar la partida"</b>, este espacio se reemplaza por el juego con
+          su propia estética (tablero, cartas, HUD de turno). La estética del portal no cambia.
+        </p>
+      </div>
+    </main>
+
+    <script type="module" src="/js/ui/shell.js"></script>
+  </body>
+</html>
