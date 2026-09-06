@@ -144,28 +144,28 @@ Asimétrico: texto a la izquierda, cluster de tiles rotadas a la derecha. En mob
     <!-- normal con color de rol -->
     <article class="card-chunky is-link col-span-2 xl:col-span-3 min-h-[156px] p-5 flex flex-col
                     justify-between bg-teal text-paper" role="button" tabindex="0">
-      <span class="badge-state badge-live absolute top-4 right-4"><span class="dot"></span>1 sala</span>
-      <span class="font-display font-extrabold text-[30px]">⚄</span>
-      <div><h4 class="font-display font-extrabold text-lg">Generala</h4>
-        <p class="text-paper/80 text-xs mt-1 font-medium">2 a 6 · cinco dados</p></div>
+      <span class="badge-state badge-soon absolute top-4 right-4">Pronto</span>
+      <span class="font-display font-extrabold text-[30px]">♣</span>
+      <div><h4 class="font-display font-extrabold text-lg">Chinchón</h4>
+        <p class="text-paper/80 text-xs mt-1 font-medium">2 a 4 · baraja española</p></div>
     </article>
 
     <!-- normal en paper -->
     <article class="card-chunky is-link col-span-2 xl:col-span-2 min-h-[156px] p-5 flex flex-col
                     justify-between" role="button" tabindex="0">
-      <span class="badge-state absolute top-4 right-4">Activo</span>
-      <span class="font-display font-extrabold text-[30px]">♣</span>
-      <div><h4 class="font-display font-extrabold text-lg">Chinchón</h4>
+      <span class="badge-state badge-soon absolute top-4 right-4">Pronto</span>
+      <span class="font-display font-extrabold text-[30px]">❯</span>
+      <div><h4 class="font-display font-extrabold text-lg">Ahorcado</h4>
         <p class="text-ink-3 text-xs mt-1 font-medium">2 a 4</p></div>
     </article>
 
-    <!-- bloqueada -->
-    <article class="card-chunky col-span-2 xl:col-span-2 min-h-[156px] p-5 flex flex-col justify-between
-                    opacity-50 pointer-events-none">
-      <span class="badge-state badge-lock absolute top-4 right-4">Bloqueado</span>
-      <span class="font-display font-extrabold text-[30px]">⚀</span>
-      <div><h4 class="font-display font-extrabold text-lg">Dudo</h4>
-        <p class="text-ink-3 text-xs mt-1 font-medium">2 a 6</p></div>
+    <!-- normal en paper -->
+    <article class="card-chunky is-link col-span-2 xl:col-span-2 min-h-[156px] p-5 flex flex-col
+                    justify-between" role="button" tabindex="0">
+      <span class="badge-state badge-soon absolute top-4 right-4">Pronto</span>
+      <span class="font-display font-extrabold text-[30px]">⚓</span>
+      <div><h4 class="font-display font-extrabold text-lg">Batalla Naval</h4>
+        <p class="text-ink-3 text-xs mt-1 font-medium">2 a 4</p></div>
     </article>
   </div>
 </section>
