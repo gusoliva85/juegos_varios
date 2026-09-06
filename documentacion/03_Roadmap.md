@@ -58,7 +58,7 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 - [x] **F0.2.1** · [Diseño] Self-host de fuentes (**Bricolage Grotesque**, **Inter**, variables, OFL) en `frontend/public/assets/fonts/` + `@font-face` + `LICENSES.md`. *(Esta tarea forzó la estructura del front: JS servido en `frontend/public/js/`, assets en `frontend/public/assets/`; `frontend/src/` queda solo para la entrada de Tailwind.)* → *Prueba (preview):* la página usa las fuentes sin pedir nada a `fonts.gstatic`. · *Aprobada (push `7858215`).*
 - [x] **F0.2.2** · [Diseño] Verificar que `app.css` compilado tiene todas las clases del preset. → *Prueba:* búsqueda en `public/app.css`. · *Aprobada (32/32; fix del keyframe `shimmer`, push `e7d6e8b`).*
 - [x] **F0.2.3** · [Diseño] `frontend/public/styleguide.html`: todos los componentes de `estilo-terracota-ludica/references/componentes.md`. → *Prueba:* en la preview de Vercel, comparación 1:1 contra el mockup 05. · *Aprobada (push `2a170a5`).*
-- [ ] **F0.2.4** · [Diseño] Verificar `prefers-reduced-motion` y `:focus-visible` en el styleguide. → *Prueba:* con reduce-motion activo en el SO.
+- [x] **F0.2.4** · [Diseño] Verificar `prefers-reduced-motion` y `:focus-visible` en el styleguide. → *Prueba:* con reduce-motion activo en el SO. · *Aprobada (push `ad72941`). Cierra Tema 0.2.*
 
 ## Tema 0.3 · Cascarón estático del portal (HTML + estilo, SIN lógica)
 

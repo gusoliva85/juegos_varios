@@ -3,96 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mesa &amp; Ficha</title>
+    <title>Mesa &amp; Ficha — minijuegos online</title>
+    <meta
+      name="description"
+      content="Abrí una mesa, pasá el código por WhatsApp y jugá con amigos. Ta-te-ti, chinchón, ahorcado y batalla naval, para 2 a 4."
+    />
     <link rel="stylesheet" href="/app.css" />
   </head>
   <body>
-    <!-- PLACEHOLDER de F0.1.3 — la landing real se construye en la Fase 0, Tema 0.3.
-         Existe para que Tailwind tenga markup que escanear y para revisar los tokens. -->
+    <!-- ============ Topbar (F0.3.1) ============ -->
     <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
       <div class="container max-w-[1160px] flex items-center gap-4 py-3">
-        <span class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5">
+        <a
+          href="/"
+          class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5 shrink-0"
+        >
           <span
             class="w-9 h-9 grid place-items-center rounded-[11px] border-2 border-ink bg-terra text-paper text-base shadow-hard -rotate-3"
             >◈</span
           >
           Mesa &amp; Ficha
-        </span>
-        <span class="pill ml-auto"><span class="dot"></span> en construcción</span>
+        </a>
+
+        <!-- enlaces: solo en web (≥ md) -->
+        <nav class="ml-auto hidden md:flex gap-1" aria-label="Principal">
+          <a href="#catalogo" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Juegos</a>
+          <a href="#como-va" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Cómo funciona</a>
+          <a href="/creditos.html" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Créditos</a>
+        </nav>
+
+        <!-- estado en vivo: siempre -->
+        <span class="pill ml-auto md:ml-2"><span class="dot"></span> en línea</span>
+
+        <!-- botón menú: solo mobile (se cablea en F0.3.2) -->
+        <button class="md:hidden btn !p-2 !shadow-hard-sm" aria-label="Abrir menú" data-sheet="menu">☰</button>
       </div>
     </header>
 
-    <main class="container max-w-[1160px] py-12">
-      <span class="badge-rot">◉ base de estilo cargada</span>
-      <h1 class="font-display font-extrabold leading-[1.02] text-[clamp(2.25rem,5vw,3.5rem)] my-4">
-        El portal se arma <mark class="bg-terra text-paper px-1 rounded-lg">de a poco</mark>.
-      </h1>
-      <p class="text-ink-2 max-w-[46ch]">
-        Esta pantalla es un placeholder de la tarea F0.1.3 (Tailwind + tokens del sistema de diseño).
-        La landing completa llega en el Tema 0.3 del roadmap.
-      </p>
-
-      <div class="flex flex-wrap gap-3 mt-6">
-        <button class="btn btn-primary btn-full">Botón primario ▷</button>
-        <button class="btn btn-full">Botón secundario</button>
-      </div>
-
-      <div class="grid grid-cols-2 gap-4 md:grid-cols-4 mt-8">
-        <article class="card-chunky is-link min-h-[156px] p-5 flex flex-col justify-between">
-          <span class="badge-state badge-live"><span class="dot"></span>en vivo</span>
-          <h4 class="font-display font-extrabold text-lg">Tarjeta</h4>
-        </article>
-        <article class="card-chunky is-link min-h-[156px] p-5 flex flex-col justify-between bg-teal text-paper">
-          <span class="badge-state badge-soon">pronto</span>
-          <h4 class="font-display font-extrabold text-lg">Rol teal</h4>
-        </article>
-        <article class="card-chunky min-h-[156px] p-5 flex flex-col justify-between bg-mustard">
-          <h4 class="font-display font-extrabold text-lg">Rol mostaza</h4>
-        </article>
-        <article class="card-chunky min-h-[156px] p-5 flex flex-col justify-between bg-berry text-paper">
-          <h4 class="font-display font-extrabold text-lg">Rol berry</h4>
-        </article>
-      </div>
-
-      <div class="flex flex-wrap items-center gap-2 mt-6">
-        <span class="badge-state badge-live"><span class="dot"></span>en vivo</span>
-        <span class="badge-state badge-soon">pronto</span>
-        <span class="badge-state badge-wait">en espera</span>
-        <span class="badge-state badge-lock">bloqueado</span>
-        <button class="btn" disabled>Deshabilitado</button>
-      </div>
-
-      <div class="panel mt-8 p-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-center">
-        <input class="field" placeholder="CHIN-7K2P" aria-label="Código de sala" />
-        <button class="btn btn-teal w-full sm:w-auto">Unirme ➜</button>
-      </div>
-
-      <div class="flex flex-wrap gap-1.5 mt-6">
-        <button class="chip" aria-pressed="true">Todos</button>
-        <button class="chip" aria-pressed="false">Cartas</button>
-        <button class="chip" aria-pressed="false">Tablero</button>
-        <button class="chip" aria-pressed="false">Palabras</button>
-      </div>
-
-      <div class="grid sm:grid-cols-2 gap-3 mt-6">
-        <div class="seat">
-          <span class="pic bg-terra text-paper">◈</span>
-          <span
-            ><span class="font-bold text-[13.5px]">Anfitrión <span class="text-terra-2">★</span></span
-            ><br /><span class="text-teal text-[11px] font-bold">✓ listo</span></span
-          >
+    <!-- ============ Contenido (se arma en F0.3.3–F0.3.6) ============ -->
+    <main class="container max-w-[1160px] pb-24 md:pb-12">
+      <section class="py-16 text-center">
+        <span class="badge-rot">◉ en construcción</span>
+        <h1 class="font-display font-extrabold text-[clamp(2rem,5vw,3.25rem)] tracking-[-.025em] my-4">
+          El portal se está armando <mark class="bg-terra text-paper px-1 rounded-lg">de a poco</mark>.
+        </h1>
+        <p class="text-ink-2 max-w-[46ch] mx-auto">
+          Estás viendo la topbar (tarea F0.3.1). El hero, el catálogo y el resto llegan en las próximas
+          tareas del roadmap.
+        </p>
+        <div class="flex flex-wrap justify-center gap-3 mt-6">
+          <a href="/styleguide.html" class="btn btn-primary">Ver el sistema de diseño ▷</a>
         </div>
-        <div class="seat seat--empty">＋ silla libre</div>
-      </div>
-
-      <div class="skeleton mt-6 h-16"></div>
+      </section>
     </main>
-
-    <nav class="bottom-nav" aria-label="Navegación">
-      <a href="/" aria-current="page"><span class="text-lg leading-none">◈</span>Inicio</a>
-      <a href="#"><span class="text-lg leading-none">♠</span>Juegos</a>
-      <a href="#"><span class="text-lg leading-none">⚇</span>Salas</a>
-      <a href="#"><span class="text-lg leading-none">★</span>Perfil</a>
-    </nav>
   </body>
 </html>
