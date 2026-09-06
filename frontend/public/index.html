@@ -150,8 +150,11 @@
         <div class="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6">
           <!-- Ta-Te-Ti (destacado) -->
           <article
-            class="card-chunky col-span-2 xl:col-span-3 min-h-[196px] md:min-h-[220px] p-5 flex flex-col justify-between bg-terra text-paper"
+            class="card-chunky is-link col-span-2 xl:col-span-3 min-h-[196px] md:min-h-[220px] p-5 flex flex-col justify-between bg-terra text-paper"
             data-cat="tablero"
+            data-game="Ta-Te-Ti"
+            role="button"
+            tabindex="0"
           >
             <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
             <span class="font-display font-extrabold text-[30px]" aria-hidden="true">⊗</span>
@@ -163,8 +166,11 @@
 
           <!-- Chinchón -->
           <article
-            class="card-chunky col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-teal text-paper"
+            class="card-chunky is-link col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-teal text-paper"
             data-cat="cartas"
+            data-game="Chinchón"
+            role="button"
+            tabindex="0"
           >
             <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
             <span class="font-display font-extrabold text-[28px]" aria-hidden="true">♣</span>
@@ -176,8 +182,11 @@
 
           <!-- Ahorcado -->
           <article
-            class="card-chunky col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between"
+            class="card-chunky is-link col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between"
             data-cat="palabras"
+            data-game="Ahorcado"
+            role="button"
+            tabindex="0"
           >
             <span class="badge-state badge-soon absolute top-4 right-4">Pronto</span>
             <span class="font-display font-extrabold text-[28px] text-terra-2" aria-hidden="true">❯</span>
@@ -189,8 +198,11 @@
 
           <!-- Batalla Naval -->
           <article
-            class="card-chunky col-span-2 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-berry text-paper"
+            class="card-chunky is-link col-span-2 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-berry text-paper"
             data-cat="tablero"
+            data-game="Batalla Naval"
+            role="button"
+            tabindex="0"
           >
             <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
             <span class="font-display font-extrabold text-[28px]" aria-hidden="true">⚓</span>
@@ -207,5 +219,7 @@
     </main>
 
     <script type="module" src="/js/ui/shell.js"></script>
+
+    <script type="module" src="/js/ui/portal.js"></script>
   </body>
 </html>

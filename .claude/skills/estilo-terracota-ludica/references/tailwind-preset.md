@@ -101,6 +101,7 @@ module.exports = {
   }
   h1,h2,h3,h4{ @apply font-display tracking-[-.02em]; }
   ::selection{ @apply bg-terra text-paper; }
+  [hidden]{ display:none!important; }  /* gana sobre .flex/.grid: toggle visibilidad con el atributo `hidden` */
   :focus-visible{ @apply outline-none ring-2 ring-terra ring-offset-2 ring-offset-cream; }
 
   @media (prefers-reduced-motion:reduce){

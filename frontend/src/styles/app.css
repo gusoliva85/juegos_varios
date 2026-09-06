@@ -48,6 +48,9 @@
   ::selection {
     @apply bg-terra text-paper;
   }
+  [hidden] {
+    display: none !important;
+  }
   :focus-visible {
     @apply outline-none ring-2 ring-terra ring-offset-2 ring-offset-cream;
   }
@@ -172,6 +175,18 @@
   }
   .seat--empty {
     @apply justify-center border-dashed text-ink-3 text-xs font-semibold bg-transparent;
+  }
+
+  /* ---------- Toast (aviso efímero al pie) ---------- */
+  .toast {
+    @apply fixed left-1/2 bottom-6 z-[60] max-w-[90vw] text-center pointer-events-none
+           border-2 border-ink rounded-[14px] bg-ink text-cream font-bold text-sm
+           px-4 py-2.5 shadow-hard-lg opacity-0 transition-all duration-200 ease-pop;
+    transform: translate(-50%, 8px);
+  }
+  .toast.is-shown {
+    @apply opacity-100;
+    transform: translate(-50%, 0);
   }
 
   /* ---------- Skeleton ---------- */
