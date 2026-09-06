@@ -146,6 +146,76 @@
         />
         <button type="button" class="btn btn-primary btn-full" data-join-submit>Unirme ➜</button>
       </section>
+
+      <!-- ============ Catálogo (F0.3.5 · datos hardcodeados) ============ -->
+      <section id="catalogo" class="scroll-mt-24 mt-4">
+        <div class="flex flex-wrap items-center justify-between gap-3 my-5">
+          <h2 class="font-display font-extrabold text-[1.75rem]">Elegí tu juego</h2>
+          <div class="flex flex-wrap gap-1.5" role="group" aria-label="Filtrar por tipo">
+            <button type="button" class="chip" aria-pressed="true" data-filter="todos">Todos</button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="cartas">Cartas</button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="tablero">Tablero</button>
+            <button type="button" class="chip" aria-pressed="false" data-filter="palabras">Palabras</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 md:grid-cols-4 xl:grid-cols-6">
+          <!-- Ta-Te-Ti (destacado) -->
+          <article
+            class="card-chunky col-span-2 xl:col-span-3 min-h-[196px] md:min-h-[220px] p-5 flex flex-col justify-between bg-terra text-paper"
+            data-cat="tablero"
+          >
+            <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
+            <span class="font-display font-extrabold text-[30px]" aria-hidden="true">⊗</span>
+            <div>
+              <h3 class="font-display font-extrabold text-2xl">Ta-Te-Ti</h3>
+              <p class="text-paper/80 text-xs mt-1 font-medium">2 jugadores · o contra el bot</p>
+            </div>
+          </article>
+
+          <!-- Chinchón -->
+          <article
+            class="card-chunky col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-teal text-paper"
+            data-cat="cartas"
+          >
+            <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
+            <span class="font-display font-extrabold text-[28px]" aria-hidden="true">♣</span>
+            <div>
+              <h3 class="font-display font-extrabold text-lg">Chinchón</h3>
+              <p class="text-paper/80 text-xs mt-1 font-medium">2 a 4 · baraja española</p>
+            </div>
+          </article>
+
+          <!-- Ahorcado -->
+          <article
+            class="card-chunky col-span-1 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between"
+            data-cat="palabras"
+          >
+            <span class="badge-state badge-soon absolute top-4 right-4">Pronto</span>
+            <span class="font-display font-extrabold text-[28px] text-terra-2" aria-hidden="true">❯</span>
+            <div>
+              <h3 class="font-display font-extrabold text-lg">Ahorcado</h3>
+              <p class="text-ink-3 text-xs mt-1 font-medium">2 a 4 · cooperativo o por turnos</p>
+            </div>
+          </article>
+
+          <!-- Batalla Naval -->
+          <article
+            class="card-chunky col-span-2 md:col-span-2 xl:col-span-3 min-h-[150px] md:min-h-[168px] p-5 flex flex-col justify-between bg-berry text-paper"
+            data-cat="tablero"
+          >
+            <span class="badge-state bg-paper text-ink absolute top-4 right-4">Pronto</span>
+            <span class="font-display font-extrabold text-[28px]" aria-hidden="true">⚓</span>
+            <div>
+              <h3 class="font-display font-extrabold text-lg">Batalla Naval</h3>
+              <p class="text-paper/80 text-xs mt-1 font-medium">2 a 4 · hundí la flota</p>
+            </div>
+          </article>
+        </div>
+        <p class="text-ink-3 text-xs mt-4">
+          Todos los juegos están por abrir. Cuando uno esté activo vas a poder crear una sala desde su tarjeta.
+        </p>
+      </section>
     </main>
 
     <script type="module" src="/js/ui/shell.js"></script>
