@@ -57,6 +57,7 @@ module.exports = {
         bob: "bob 1.6s cubic-bezier(.22,1,.36,1) infinite",
         pulse: "pulse 2s cubic-bezier(.22,1,.36,1) infinite",
         "slide-up": "slide-up .28s cubic-bezier(.22,1,.36,1)",
+        shimmer: "shimmer 1.4s ease-in-out infinite",
       },
     },
   },
@@ -196,9 +197,8 @@ module.exports = {
   /* ---------- Skeleton ---------- */
   .skeleton{ @apply relative overflow-hidden bg-cream-2 rounded-md; }
   .skeleton::after{
-    content:""; @apply absolute inset-0 -translate-x-full;
+    content:""; @apply absolute inset-0 -translate-x-full animate-shimmer;
     background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
-    animation:shimmer 1.4s infinite;
   }
 }
 ```

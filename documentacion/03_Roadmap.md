@@ -55,7 +55,7 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 
 ## Tema 0.2 · Sistema de diseño operativo
 
-- [~] **F0.2.1** · [Diseño] Self-host de fuentes (**Bricolage Grotesque**, **Inter**, variables, OFL) en `frontend/public/assets/fonts/` + `@font-face` + `LICENSES.md`. *(Esta tarea forzó la estructura del front: JS servido en `frontend/public/js/`, assets en `frontend/public/assets/`; `frontend/src/` queda solo para la entrada de Tailwind.)* → *Prueba (preview):* la página usa las fuentes sin pedir nada a `fonts.gstatic`.
+- [x] **F0.2.1** · [Diseño] Self-host de fuentes (**Bricolage Grotesque**, **Inter**, variables, OFL) en `frontend/public/assets/fonts/` + `@font-face` + `LICENSES.md`. *(Esta tarea forzó la estructura del front: JS servido en `frontend/public/js/`, assets en `frontend/public/assets/`; `frontend/src/` queda solo para la entrada de Tailwind.)* → *Prueba (preview):* la página usa las fuentes sin pedir nada a `fonts.gstatic`. · *Aprobada (push `7858215`).*
 - [ ] **F0.2.2** · [Diseño] Verificar que `app.css` compilado tiene todas las clases del preset (`.btn`, `.card-chunky`, `.panel`, `.field`, `.chip`, `.badge-*`, `.pill`, `.bottom-nav`, `.seat`, `.skeleton`). → *Prueba:* búsqueda en `public/app.css`.
 - [ ] **F0.2.3** · [Diseño] `frontend/public/styleguide.html`: todos los componentes de `estilo-terracota-ludica/references/componentes.md`. → *Prueba:* en la preview de Vercel, comparación 1:1 contra el mockup 05.
 - [ ] **F0.2.4** · [Diseño] Verificar `prefers-reduced-motion` y `:focus-visible` en el styleguide. → *Prueba:* con reduce-motion activo en el SO.

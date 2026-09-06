@@ -45,6 +45,7 @@ module.exports = {
         bob: "bob 1.6s cubic-bezier(.22,1,.36,1) infinite",
         pulse: "pulse 2s cubic-bezier(.22,1,.36,1) infinite",
         "slide-up": "slide-up .28s cubic-bezier(.22,1,.36,1)",
+        shimmer: "shimmer 1.4s ease-in-out infinite",
       },
     },
   },
