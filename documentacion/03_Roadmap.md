@@ -62,7 +62,7 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 
 ## Tema 0.3 · Cascarón estático del portal (HTML + estilo, SIN lógica)
 
-- [ ] **F0.3.1** · [Frontend] `index.html` — topbar responsive (marca, `pill`, enlaces `hidden md:flex`, botón menú `md:hidden`). → *Prueba (preview):* 375px muestra el botón menú; 1280px los enlaces.
+- [x] **F0.3.1** · [Frontend] `index.html` — topbar responsive (marca, `pill`, enlaces `hidden md:flex`, botón menú `md:hidden`). → *Prueba (preview):* 375px muestra el botón menú; 1280px los enlaces. · *Aprobada (push `8536151`).*
 - [ ] **F0.3.2** · [Frontend] `bottom-nav` (`md:hidden`) + menú-hoja (`animate-slide-up`, backdrop `bg-ink/20`). → *Prueba (preview):* mobile muestra la barra inferior; desktop no.
 - [ ] **F0.3.3** · [Frontend] Hero (badge rotado, `<h1>` con `<mark>`, 2 CTA `btn-full`, cluster de 4 tiles rotadas con hover; en mobile el cluster arriba). → *Prueba (preview):* coincide con el mockup; sin scroll horizontal en 360px.
 - [ ] **F0.3.4** · [Frontend] Módulo "unirse con código" (visual). → *Prueba (preview):* igual al mockup en mobile y web.

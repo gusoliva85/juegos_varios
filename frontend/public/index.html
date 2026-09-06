@@ -25,20 +25,55 @@
           Mesa &amp; Ficha
         </a>
 
-        <!-- enlaces: solo en web (≥ md) -->
         <nav class="ml-auto hidden md:flex gap-1" aria-label="Principal">
           <a href="#catalogo" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Juegos</a>
           <a href="#como-va" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Cómo funciona</a>
           <a href="/creditos.html" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Créditos</a>
         </nav>
 
-        <!-- estado en vivo: siempre -->
         <span class="pill ml-auto md:ml-2"><span class="dot"></span> en línea</span>
 
-        <!-- botón menú: solo mobile (se cablea en F0.3.2) -->
-        <button class="md:hidden btn !p-2 !shadow-hard-sm" aria-label="Abrir menú" data-sheet="menu">☰</button>
+        <button
+          class="md:hidden btn !p-2 !shadow-hard-sm"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu-sheet"
+          data-sheet="menu"
+        >
+          ☰
+        </button>
       </div>
     </header>
+
+    <!-- ============ Bottom-nav (F0.3.2 · solo mobile) ============ -->
+    <nav class="bottom-nav" aria-label="Navegación">
+      <a href="/" aria-current="page"><span class="text-lg leading-none" aria-hidden="true">◈</span>Inicio</a>
+      <a href="#catalogo"><span class="text-lg leading-none" aria-hidden="true">♠</span>Juegos</a>
+      <a href="#como-va"><span class="text-lg leading-none" aria-hidden="true">⚇</span>Cómo va</a>
+      <a href="/perfil.html"><span class="text-lg leading-none" aria-hidden="true">★</span>Perfil</a>
+    </nav>
+
+    <!-- ============ Menú-hoja (F0.3.2 · lo abre el ☰) ============ -->
+    <div id="menu-sheet" hidden>
+      <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
+      <div
+        class="fixed inset-x-0 bottom-0 z-50 border-t-2 border-ink bg-cream p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] animate-slide-up"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú"
+      >
+        <div class="mx-auto max-w-[420px] flex flex-col gap-2">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-display font-extrabold text-lg">Menú</span>
+            <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
+          </div>
+          <a href="#catalogo" class="btn w-full">Juegos</a>
+          <a href="#como-va" class="btn w-full">Cómo funciona</a>
+          <a href="/creditos.html" class="btn w-full">Créditos</a>
+          <a href="/perfil.html" class="btn btn-primary w-full">Mi perfil</a>
+        </div>
+      </div>
+    </div>
 
     <!-- ============ Contenido (se arma en F0.3.3–F0.3.6) ============ -->
     <main class="container max-w-[1160px] pb-24 md:pb-12">
@@ -48,13 +83,15 @@
           El portal se está armando <mark class="bg-terra text-paper px-1 rounded-lg">de a poco</mark>.
         </h1>
         <p class="text-ink-2 max-w-[46ch] mx-auto">
-          Estás viendo la topbar (tarea F0.3.1). El hero, el catálogo y el resto llegan en las próximas
-          tareas del roadmap.
+          Topbar (F0.3.1) y navegación mobile (F0.3.2) listas. El hero, el catálogo y el resto llegan en
+          las próximas tareas del roadmap.
         </p>
         <div class="flex flex-wrap justify-center gap-3 mt-6">
           <a href="/styleguide.html" class="btn btn-primary">Ver el sistema de diseño ▷</a>
         </div>
       </section>
     </main>
+
+    <script type="module" src="/js/ui/shell.js"></script>
   </body>
 </html>
