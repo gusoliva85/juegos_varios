@@ -91,7 +91,7 @@ module.exports = {
 
 @layer base{
   :root{ color-scheme:light; }
-  html{ scroll-behavior:smooth; }
+  html{ scroll-behavior:smooth; overflow-x:clip; }  /* decorativos nunca generan scroll horizontal; `clip` no rompe sticky */
   body{
     @apply bg-cream text-ink font-sans antialiased;
     background-image:

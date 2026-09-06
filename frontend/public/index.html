@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/app.css" />
   </head>
   <body>
-    <!-- ============ Topbar (F0.3.1) ============ -->
+    <!-- ============ Topbar ============ -->
     <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
       <div class="container max-w-[1160px] flex items-center gap-4 py-3">
         <a
@@ -27,7 +27,6 @@
 
         <nav class="ml-auto hidden md:flex gap-1" aria-label="Principal">
           <a href="#catalogo" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Juegos</a>
-          <a href="#como-va" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Cómo funciona</a>
           <a href="/creditos.html" class="px-3 py-2 rounded-[9px] text-sm font-semibold text-ink-2 hover:bg-cream-2">Créditos</a>
         </nav>
 
@@ -45,15 +44,15 @@
       </div>
     </header>
 
-    <!-- ============ Bottom-nav (F0.3.2 · solo mobile) ============ -->
+    <!-- ============ Bottom-nav (solo mobile) ============ -->
     <nav class="bottom-nav" aria-label="Navegación">
       <a href="/" aria-current="page"><span class="text-lg leading-none" aria-hidden="true">◈</span>Inicio</a>
       <a href="#catalogo"><span class="text-lg leading-none" aria-hidden="true">♠</span>Juegos</a>
-      <a href="#como-va"><span class="text-lg leading-none" aria-hidden="true">⚇</span>Cómo va</a>
+      <a href="/creditos.html"><span class="text-lg leading-none" aria-hidden="true">◆</span>Créditos</a>
       <a href="/perfil.html"><span class="text-lg leading-none" aria-hidden="true">★</span>Perfil</a>
     </nav>
 
-    <!-- ============ Menú-hoja (F0.3.2 · lo abre el ☰) ============ -->
+    <!-- ============ Menú-hoja (lo abre el ☰) ============ -->
     <div id="menu-sheet" hidden>
       <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
       <div
@@ -68,26 +67,61 @@
             <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
           </div>
           <a href="#catalogo" class="btn w-full">Juegos</a>
-          <a href="#como-va" class="btn w-full">Cómo funciona</a>
           <a href="/creditos.html" class="btn w-full">Créditos</a>
           <a href="/perfil.html" class="btn btn-primary w-full">Mi perfil</a>
         </div>
       </div>
     </div>
 
-    <!-- ============ Contenido (se arma en F0.3.3–F0.3.6) ============ -->
     <main class="container max-w-[1160px] pb-24 md:pb-12">
-      <section class="py-16 text-center">
-        <span class="badge-rot">◉ en construcción</span>
-        <h1 class="font-display font-extrabold text-[clamp(2rem,5vw,3.25rem)] tracking-[-.025em] my-4">
-          El portal se está armando <mark class="bg-terra text-paper px-1 rounded-lg">de a poco</mark>.
-        </h1>
-        <p class="text-ink-2 max-w-[46ch] mx-auto">
-          Topbar (F0.3.1) y navegación mobile (F0.3.2) listas. El hero, el catálogo y el resto llegan en
-          las próximas tareas del roadmap.
-        </p>
-        <div class="flex flex-wrap justify-center gap-3 mt-6">
-          <a href="/styleguide.html" class="btn btn-primary">Ver el sistema de diseño ▷</a>
+      <!-- ============ Hero (F0.3.3) ============ -->
+      <section class="grid gap-8 py-10 md:gap-10 md:py-16 md:grid-cols-[1.05fr_.95fr] md:items-center">
+        <div>
+          <span class="badge-rot">◉ sin descargar nada</span>
+          <h1
+            class="font-display font-extrabold leading-[1.02] tracking-[-.025em] text-[clamp(2.35rem,6vw,4rem)] my-4"
+          >
+            Abrí la mesa,<br />pasá el
+            <mark
+              class="bg-terra text-paper px-1 rounded-lg [-webkit-box-decoration-break:clone] [box-decoration-break:clone]"
+              >código</mark
+            >,<br />que jueguen todos.
+          </h1>
+          <p class="text-ink-2 text-[1.03rem] leading-relaxed max-w-[44ch]">
+            Ta-te-ti, chinchón, ahorcado y batalla naval. Para dos a cuatro. Compartís el código por
+            WhatsApp y cuando están todos, el anfitrión aprieta arrancar.
+          </p>
+          <div class="flex flex-wrap gap-3 mt-6">
+            <button class="btn btn-primary btn-full" data-create-room>Crear sala rápida ▷</button>
+            <a href="#catalogo" class="btn btn-full">Ver los juegos</a>
+          </div>
+        </div>
+
+        <!-- cluster de tiles -->
+        <div
+          class="group relative h-[260px] sm:h-[300px] md:h-[340px] order-first md:order-none overflow-x-clip select-none"
+          aria-hidden="true"
+        >
+          <div
+            class="absolute left-1 top-8 w-[132px] h-[176px] sm:w-[150px] sm:h-[196px] grid place-items-center border-2 border-ink rounded-[20px] bg-paper text-terra font-display font-extrabold text-[54px] sm:text-[62px] shadow-hard -rotate-[8deg] transition-transform duration-[350ms] ease-pop group-hover:-rotate-[11deg] group-hover:-translate-y-1.5"
+          >
+            ♠
+          </div>
+          <div
+            class="absolute right-2 top-0 w-[118px] h-[118px] sm:w-[132px] sm:h-[132px] grid place-items-center border-2 border-ink rounded-[20px] bg-teal text-paper font-display font-extrabold text-[40px] sm:text-[46px] shadow-hard rotate-[7deg] transition-transform duration-[350ms] ease-pop group-hover:rotate-[10deg] group-hover:-translate-y-1.5"
+          >
+            ⚄
+          </div>
+          <div
+            class="absolute right-0 bottom-4 w-[106px] h-[106px] sm:w-[120px] sm:h-[120px] grid place-items-center border-2 border-ink rounded-[20px] bg-mustard text-ink font-display font-extrabold text-[38px] sm:text-[44px] shadow-hard -rotate-[5deg] transition-transform duration-[350ms] ease-pop group-hover:-rotate-[8deg] group-hover:-translate-y-1"
+          >
+            ♦
+          </div>
+          <div
+            class="absolute left-[104px] bottom-0 w-[94px] h-[94px] sm:w-[104px] sm:h-[104px] grid place-items-center border-2 border-ink rounded-[20px] bg-berry text-paper font-display font-extrabold text-[34px] sm:text-[40px] shadow-hard rotate-[9deg] transition-transform duration-[350ms] ease-pop group-hover:rotate-[12deg] group-hover:-translate-y-1"
+          >
+            ⚇
+          </div>
         </div>
       </section>
     </main>

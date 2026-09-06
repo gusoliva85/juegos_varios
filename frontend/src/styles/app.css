@@ -28,6 +28,9 @@
   }
   html {
     scroll-behavior: smooth;
+    /* Ningún elemento decorativo (tiles rotadas, bleeds) genera scroll horizontal.
+       `clip` no crea contenedor de scroll -> no rompe `position: sticky`. */
+    overflow-x: clip;
   }
   body {
     @apply bg-cream text-ink font-sans antialiased;
