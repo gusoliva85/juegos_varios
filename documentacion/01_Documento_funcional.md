@@ -586,13 +586,15 @@ Alineado con la spec técnica §7, ajustado a este alcance funcional.
 | D2 | Motor realtime | **Cerrado:** Supabase Realtime (Postgres Changes + Presence + Broadcast). |
 | D3 | Truco: reglas de la casa | Diferido a Fase 11 (backlog). |
 | D4 | Baraja española | Abierto — adaptar set de dominio público vs. dibujar propia (Fase 7). |
-| D5 | Assets | **Cerrado:** internos en `frontend/assets/`. |
+| D5 | Assets | **Cerrado:** internos en `frontend/public/assets/`. |
 | D6 | Avatares | Abierto — Boring Avatars (MIT) vs. set propio (Fase 1). |
 | D7 | Salas privadas en v1 | **Cerrado:** el ID funciona como clave; privada explícita más adelante. |
 | D8 | Espectadores en v1 | **Cerrado:** a Fase 9. |
 | D9 | Música de fondo | **Cerrado:** sí, muteada por defecto (Fase 9, opcional). |
 | D10 | Persistencia | **Cerrado:** Supabase PostgreSQL desde el día 1. |
-| D11 | Auth | **Cerrado:** Supabase Anonymous Sign-In; OAuth opcional en Fase 11. |
+| D11 | Identidad / nombre | **Cerrado:** nombre **obligatorio** para entrar a un juego (nombre rápido anónimo, Fase 1). Vincular cuenta email/Google para portabilidad = **opcional**, Fase 11. Sin nav footer/bottom-nav: menú único (`☰`). |
+| D12 | Chat de voz | **Cerrado:** sí — WebRTC malla P2P (≤4), signaling por Supabase Broadcast, STUN gratis + TURN de respaldo. Feature autónoma, Fase 9 · Tema 9.7. Muteado por defecto. |
+| D13 | Navegación del portal | **Cerrado:** sin footer ni bottom-nav; una sola navegación por el menú-hoja del `☰` (todos los tamaños). |
 
 ---
 

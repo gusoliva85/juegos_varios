@@ -67,10 +67,10 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 - [x] **F0.3.3** · [Frontend] Hero (badge rotado, `<h1>` con `<mark>`, 2 CTA `btn-full`, cluster de 4 tiles rotadas con hover; en mobile el cluster arriba). `html{overflow-x:clip}` como guard. → *Prueba (preview):* coincide con el mockup; sin scroll horizontal en 360px. · *Aprobada (push `ed7f7a2`).*
 - [x] **F0.3.4** · [Frontend] Módulo "unirse con código" (visual). → *Prueba (preview):* igual al mockup en mobile y web. · *Aprobada (push `57e4edd`).*
 - [x] **F0.3.5** · [Frontend] Bento del catálogo con **datos hardcodeados** — los 4 juegos (Ta-Te-Ti destacado, 2 jug.; Chinchón, Ahorcado, Batalla Naval, 2–4; todos "Próximamente"). Grilla `grid-cols-2 md:grid-cols-4 xl:grid-cols-6`. Chips de filtro visuales + `data-cat`. → *Prueba (preview):* en desktop las 4 tarjetas aprovechan el ancho sin ensancharse; en mobile 2 columnas. · *Aprobada (push `548fb5a`).*
-- [ ] **F0.3.6** · [Frontend] Footer + enlace a `creditos.html`. → *Prueba (preview):* visible, navega.
-- [ ] **F0.3.7** · [Frontend] `jugar.html` — cascarón de partida estático: cabecera de sala, lobby con asientos hardcodeados + panel compartir + botón iniciar + `<main>` placeholder. 1 columna mobile / 2 `lg`. → *Prueba (preview):* coincide con la "sala de espera" del mockup en ambos anchos.
-- [ ] **F0.3.8** · [Frontend] `creditos.html` y `perfil.html` placeholders con el cascarón. → *Prueba (preview):* navegan, mantienen el estilo.
-- [ ] **F0.3.9** · [Frontend] Auditoría responsive del cascarón en 375 / 412 / 768 / 1280 px. → *Prueba (preview):* sin scroll horizontal, sin botones/tarjetas estirados en ninguna pantalla.
+- [x] **F0.3.6** · ~~Footer~~ **Eliminado por decisión del cliente.** No hay footer ni bottom-nav: la única navegación es el menú-hoja del `☰` (Inicio / Juegos / Créditos / Mi perfil). Aplicado también a la skill (`componentes.md`, `tailwind-preset.md` sin `.bottom-nav`) y al styleguide. *(push `0637892`)*
+- [ ] **F0.3.7** · [Frontend] `jugar.html` — cascarón de partida estático: topbar (mismo shell, sin bottom-nav), cabecera de sala, lobby con asientos hardcodeados + panel compartir + botón iniciar + `<main>` placeholder. 1 columna mobile / 2 `lg`. → *Prueba (preview):* coincide con la "sala de espera" del mockup en ambos anchos.
+- [ ] **F0.3.8** · [Frontend] `creditos.html` y `perfil.html`: pasar los stubs al cascarón real (topbar + menú-hoja + contenedor). → *Prueba (preview):* navegan, mantienen el estilo, el ☰ funciona.
+- [ ] **F0.3.9** · [Frontend] Auditoría responsive del cascarón (`index`, `jugar`, `creditos`, `perfil`, `styleguide`) en 375 / 412 / 768 / 1280 px. → *Prueba (preview):* sin scroll horizontal, sin botones/tarjetas estirados en ninguna pantalla; el menú-hoja abre bien en todos los anchos.
 - [ ] **F0.3.10** · [Frontend] Micro-interacciones **de demo** (sin backend): hover de tarjetas, "copiar" → `copiado ✓`, filtros cambian `aria-pressed`, WhatsApp abre `wa.me` con texto de ejemplo. → *Prueba (preview):* cada interacción responde.
 
 ## Tema 0.4 · Repo, Supabase y despliegue en Vercel
@@ -88,15 +88,28 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 
 ---
 
-# FASE 1 · Identidad anónima (Supabase Auth)
+# FASE 1 · Identidad — nombre obligatorio (Supabase Auth)
 
-Objetivo: cada visitante obtiene una sesión anónima de Supabase; elige nombre + avatar; se guarda en la
-tabla `player` (con RLS) y se muestra en la interfaz.
+Objetivo: **nadie entra a un juego sin nombre.** Cada visitante obtiene una sesión anónima de Supabase; la
+primera vez que quiere crear o unirse a una sala se le pide un **nombre rápido** (2–16, + avatar) que queda
+guardado y editable. Vincular una cuenta (email/Google) para portabilidad entre dispositivos es **opcional**
+y va a Fase 11 (Backlog).
+
+### Modelo de identidad (dos niveles)
+
+| Nivel | Cómo | Qué persiste | Registro |
+|---|---|---|---|
+| **1 · Nombre rápido (obligatorio)** | Al intentar entrar a un juego sin nombre → modal bloqueante: nombre + avatar. Se guarda contra la **sesión anónima de Supabase** (`auth.uid()` estable en ese navegador) + `localStorage`. | Nombre, avatar, y —más adelante— historial/estadísticas, **en ese dispositivo/navegador**. Editable desde el perfil. | **No.** |
+| **2 · Cuenta (opcional, Fase 11 · Backlog)** | Desde el perfil: "Guardá tu nombre y progreso" → vincular **email (OTP/magic link)** o **Google** (Supabase Auth `linkIdentity`). | Todo lo del nivel 1, pero **portable** a cualquier dispositivo, sin perderse al limpiar el navegador. | Sí, pero opcional. |
+
+- El `player_id` es siempre el `auth.uid()`. Al vincular cuenta, el `uid` se conserva (no se migra data).
+- Si alguien limpia el navegador sin haber vinculado cuenta → identidad nueva la próxima vez (nombre nuevo).
+- Dentro de una sala, cada jugador se muestra por **nombre + avatar**; nunca hay un jugador "sin nombre".
 
 ## Tema 1.1 · Lógica
 
-- [ ] **F1.1.1** · [Lógica] Definir: reglas de nombre (2–16, sin URLs, lista negra básica) y set base de avatares (`avatar_id` + SVG). Doc breve `backend/app/core/IDENTITY.md`. El `player_id` **es** el `auth.uid()` de Supabase (no se genera). → *Prueba:* revisión.
-- [ ] **F1.1.2** · [Lógica] `core/names.py`: `validate_name(str) -> Result`. → *Prueba:* `pytest` — válidos, corto, largo, con URL, con palabra vetada.
+- [ ] **F1.1.1** · [Lógica] Definir: reglas de nombre (**obligatorio**, 2–16, sin URLs, lista negra básica, sin duplicado exacto dentro de una misma sala → se sufija " (2)") y set base de avatares (`avatar_id` + SVG). Doc breve `backend/app/core/IDENTITY.md`. El `player_id` **es** el `auth.uid()` de Supabase. → *Prueba:* revisión.
+- [ ] **F1.1.2** · [Lógica] `core/names.py`: `validate_name(str) -> Result` + `dedupe_in_room(name, existing)`. → *Prueba:* `pytest` — válidos, corto, largo, con URL, con palabra vetada, colisión en sala.
 
 ## Tema 1.2 · Backend / DB
 
@@ -110,11 +123,12 @@ tabla `player` (con RLS) y se muestra en la interfaz.
 
 - [ ] **F1.3.1** · [Frontend] `js/core/identity.js`: al cargar, `supabase.auth.signInAnonymously()` si no hay sesión; expone `getPlayerId()`, `getToken()`. → *Prueba (preview):* primer ingreso crea sesión anónima; recarga la mantiene (localStorage de supabase-js).
 - [ ] **F1.3.2** · [Frontend] `js/core/api.js`: wrapper de `fetch` a `/api/*` con `Authorization: Bearer` + parseo de errores tipados. → *Prueba (preview):* llamada a `/api/players/me` con y sin perfil.
-- [ ] **F1.3.3** · [Frontend] Modal "Elegí tu nombre y avatar" (usa `panel` + `field` + grilla de avatares). Aparece si el perfil no tiene nombre. Al confirmar → `POST /api/players`. → *Prueba (preview):* navegador limpio → aparece; confirmar → persiste tras recarga.
-- [ ] **F1.3.4** · [Frontend] Selector de avatares (set base SVG). → *Prueba (preview):* elegir, se guarda, se ve.
-- [ ] **F1.3.5** · [Frontend] Mostrar nombre + avatar en topbar y `perfil.html`; editar desde el perfil. → *Prueba (preview):* editar en el perfil se refleja en la topbar.
-- [ ] **F1.3.6** · [Frontend] Gate: "Crear sala" / "Unirme" abren el modal si falta el nombre. → *Prueba (preview):* sin nombre, "Crear sala" abre el modal.
-- [ ] **F1.3.7** · [Prueba] Manual en la preview: primer ingreso → nombre inválido → válido → recarga → cambio de nombre. En 375px y 1280px.
+- [ ] **F1.3.3** · [Frontend] `js/ui/name-modal.js` — **modal de nombre rápido**, bloqueante (no se puede cerrar sin nombre válido salvo "cancelar" que aborta la acción): `panel` + `field` (nombre) + grilla de avatares + botón "Listo ▷". Al confirmar → `POST /api/players` → resuelve una promesa `ensureName()`. → *Prueba (preview):* navegador limpio → aparece al tocar "Crear sala rápida"; nombre inválido no deja continuar; confirmar → persiste tras recarga.
+- [ ] **F1.3.4** · [Frontend] Selector de avatares (set base SVG, ~8–12). → *Prueba (preview):* elegir, se guarda, se ve.
+- [ ] **F1.3.5** · [Frontend] `perfil.html`: mostrar y **editar** nombre + avatar (mismo `POST /api/players`); mostrar nombre+avatar en la topbar (reemplaza el `pill` "en línea" por el avatar + nombre cuando hay identidad). → *Prueba (preview):* editar en el perfil se refleja en la topbar y en el menú.
+- [ ] **F1.3.6** · [Frontend] `js/core/identity.js` expone `ensureName()`: si hay nombre → resuelve ya; si no → abre el modal y resuelve al confirmar (rechaza si cancela). **Todo botón que entra a un juego** ("Crear sala rápida", "Unirme con código", "Crear sala" de una tarjeta, y el deep-link `?sala=`) llama `await ensureName()` antes de seguir. → *Prueba (preview):* sin nombre, cualquiera de esas acciones abre el modal; con nombre, no.
+- [ ] **F1.3.7** · [Frontend] Placeholder de "vincular cuenta" en `perfil.html`: sección "Guardá tu nombre en cualquier dispositivo" con un botón deshabilitado + nota "próximamente" (la implementación real es Fase 11). → *Prueba (preview):* se ve la sección.
+- [ ] **F1.3.8** · [Prueba] Manual en la preview: navegador limpio → "Crear sala rápida" pide nombre → inválido no pasa → válido pasa → recarga mantiene el nombre → cambio de nombre desde el perfil → limpiar `localStorage`/sesión → vuelve a pedir nombre. En 375px y 1280px.
 
 ---
 
@@ -330,6 +344,22 @@ ligar combinaciones, cerrar, puntaje acumulado, eliminación.
 - [ ] **F9.5.1** · [Frontend] Selector de dorso de carta y color de ficha en `perfil.html` (persistido); aplicado en las mesas vía variables CSS de assets. → *Prueba (preview):* cambiar skin y verla en Chinchón.
 - [ ] **F9.6.1** · [Frontend] (Opcional) Música de fondo CC0 para el portal, muteada por defecto, toggle persistido, se agacha durante SFX. → *Prueba (preview):* no arranca sola; peso dentro de presupuesto.
 
+## Tema 9.7 · Voz en la sala (chat de voz)
+
+Feature **autónoma** — no toca la lógica de juego. Permite que jugadores en lugares distintos se escuchen.
+**Complejidad: media.** Arquitectura: **WebRTC malla P2P** entre los ≤ 4 jugadores; el *signaling* (SDP +
+ICE) viaja por **Supabase Realtime Broadcast** (que ya usamos); **STUN** gratis (Google) para NAT; y un
+**TURN de respaldo** para el ~10–20 % de redes con NAT simétrico. Audio ≈ 30–50 kbps por par → 4 jugadores
+= 6 conexiones, trivial. Costo ~cero a escala chica (el TURN gratis alcanza). Detalle en
+`02_Documento_Tecnico.md` §16.
+
+- [ ] **F9.7.1** · [Infra] Decidir el **TURN**: evaluar Cloudflare Calls (tier gratis ~1 TB/mes), Metered (50 GB/mes gratis) o Twilio. Config en env (`TURN_URLS`, `TURN_USERNAME`, `TURN_CREDENTIAL`). Endpoint `GET /api/voice/ice` que devuelve la lista de servidores ICE (STUN públicos + TURN con credencial efímera si el proveedor la soporta). → *Prueba:* el endpoint responde una config ICE válida en la preview.
+- [ ] **F9.7.2** · [Lógica] Protocolo de signaling sobre Broadcast: eventos `voice.offer` / `voice.answer` / `voice.ice` / `voice.leave` en el canal `room:<id>` (payload dirigido `to: <playerId>`). Reglas de "quién llama a quién" (el que entra después ofrece a los presentes). → *Prueba:* `pytest`/unit del reductor de estado de la malla.
+- [ ] **F9.7.3** · [Frontend] `js/core/voice.js`: `getUserMedia({audio})`, crear `RTCPeerConnection` por peer, intercambiar SDP/ICE por Broadcast, adjuntar `MediaStream` remoto a un `<audio autoplay>` por jugador. Reintento/renegociación si un peer se cae. → *Prueba (preview):* 2 pestañas (o 2 dispositivos) se escuchan.
+- [ ] **F9.7.4** · [Frontend] UI en el `<main>` del juego: botón **micrófono on/off** (mute local = `track.enabled=false`), **muteado por defecto**, pedir permiso solo al activarlo por primera vez. Indicador de **"hablando"** por jugador (analizar `AudioContext` level). Mutear a un jugador puntual (volumen 0 en su `<audio>`). → *Prueba (preview):* mute/unmute funciona; se ve quién habla.
+- [ ] **F9.7.5** · [Frontend] Degradación elegante: sin permiso de micrófono / navegador sin WebRTC / falla de TURN → cartel claro ("no pudimos activar el micrófono, seguí jugando igual"); el juego nunca se bloquea por la voz. Aviso de privacidad al activar ("los demás jugadores de la sala te van a escuchar"). → *Prueba (preview):* negar el permiso no rompe la partida.
+- [ ] **F9.7.6** · [Prueba] Manual: 3 jugadores en 3 dispositivos/redes distintas, activar voz, hablar, mutearse, uno recarga (se re-conecta la voz), uno sin micrófono. `prefers-reduced-motion` no afecta; el indicador de "hablando" respeta accesibilidad (no solo color).
+
 ---
 
 # FASE 10 · Robustez, rendimiento, accesibilidad y producción
@@ -376,7 +406,10 @@ Uno por vez, mismo ciclo lógica→API→frontend→prueba-en-preview.
 | R8 · Reconexión con grace period | F3.1.2, F3.2.4, F4.4.6 (re-suscripción + rehidratación) |
 | Máquina de estados de sala | F2.2.1, F3.2 |
 | Catálogo con estados | F2.1.2, F2.3.4, F2.4 |
-| Identidad anónima | Fase 1 (Supabase Anonymous Auth) |
+| **Nombre obligatorio para entrar a un juego** | Fase 1 (nombre rápido, anónimo, `ensureName()` en todo botón de juego) |
+| Cuenta con nombre definido (portable) | Fase 11 · Backlog (vincular email/Google, opcional) |
+| Identidad anónima persistente | Fase 1 (Supabase Anonymous Auth, `player_id = auth.uid()`) |
+| **Chat de voz en la sala** | Fase 9 · Tema 9.7 (WebRTC malla P2P + signaling por Supabase Broadcast + STUN/TURN) |
 | Ta-Te-Ti / Ahorcado / Batalla Naval / Chinchón | Fases 4 / 5 / 6 / 8 · `documentacion/reglas/` |
 | Truco / Generala / Escoba / Ludo / Dudo / Tutti Frutti | Fase 11 (backlog) |
 | Open Graph para WhatsApp | F8.4.1 (estático), F10.6.2 (dinámico) |

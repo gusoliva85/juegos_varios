@@ -73,7 +73,7 @@ gestionado, autenticación anónima lista, y cero servidores que mantener.
 | **PostgreSQL** | Toda la persistencia: perfiles, salas, membresías, estado de juego, vistas por jugador, historial. |
 | **Realtime (Postgres Changes)** | El cliente se suscribe a `room_sync` y `player_view` filtrados por sala; recibe push ante cada cambio. |
 | **Realtime (Presence)** | "Quién está conectado" en el canal de la sala, sin escribir en la base. |
-| **Realtime (Broadcast)** | Chat de sala y señales de animación efímeras (Fase 9). |
+| **Realtime (Broadcast)** | Chat de sala, señales de animación efímeras (Fase 9), y **signaling de WebRTC** para el chat de voz (Fase 9, Tema 9.7 — ver §16). |
 | **Auth (Anonymous Sign-In)** | Cada dispositivo obtiene un JWT + un `uid` estable = `player_id`. Sin registro. |
 | **Row-Level Security (RLS)** | Un jugador solo puede leer **su** `player_view`; las salas, solo sus miembros. Las funciones Python usan la *service role key* y escriben por encima de RLS. |
 | **`pg_cron`** | Barrido periódico (TTL de salas, timeouts no atendidos) cada 1–5 min. |
@@ -607,8 +607,67 @@ tarea no se implementa hasta que su lógica y su API estén probadas.
 | Timeouts/bots por `tick` del cliente + `pg_cron` | Cola / worker dedicado | Solo si aparecen juegos en tiempo real (no en el catálogo inicial). |
 | Realtime "Postgres Changes" | **Broadcast** para todo lo efímero | Menos escrituras; ya previsto en `publish.py`. |
 | Open Graph estático por juego | OG dinámico (imagen de la mesa + ID) | Vercel OG / Satori en una función. |
-| Auth anónima | + OAuth (Google) para progreso | Supabase Auth ya lo soporta; el juego anónimo sigue igual. |
+| Auth anónima + nombre obligatorio | + vincular email/Google (nombre y progreso portables) | Supabase Auth `linkIdentity`; el `auth.uid()` no cambia; el juego anónimo sigue igual. |
+| Chat de voz WebRTC malla P2P (≤4) | SFU (LiveKit/Daily) para salas grandes o mejor calidad | Reemplazar `voice.js` por el SDK; el resto igual. |
+| TURN en tier gratis | TURN pago (Twilio/Cloudflare) | Solo cambian las credenciales en env. |
 | Vanilla JS en la mesa | Motor 2D por juego | `import()` de PixiJS solo en ese `view.js`; portal intacto. |
+
+---
+
+## 16. Voz en la sala (chat de voz) — Fase 9, Tema 9.7
+
+Feature **autónoma**: no toca la lógica de juego ni el estado autoritario. Permite que jugadores en
+lugares distintos se escuchen mientras juegan.
+
+### 16.1 Arquitectura: WebRTC malla P2P + signaling por Supabase
+
+```
+Jugador A  ⇄ (audio directo, RTCPeerConnection)  ⇄  Jugador B
+   ▲                                                    ▲
+   └──── signaling (SDP offer/answer + ICE) ─────────────┘
+             por Supabase Realtime BROADCAST
+             en el canal  room:<id>   (payload dirigido: { to: <playerId> })
+
+STUN público (gratis)  → resuelve la mayoría de los NAT
+TURN de respaldo       → ~10–20 % de redes (NAT simétrico / firewall estricto): relaya el audio
+```
+
+- **≤ 4 jugadores → malla completa.** 4 jugadores = 6 conexiones; cada uno envía 3 streams de audio
+  (~30–50 kbps c/u). Trivial para el navegador y la red.
+- El **signaling** (intercambio de `RTCSessionDescription` y `RTCIceCandidate`) va por **Broadcast** de
+  Supabase Realtime, que ya usamos para el chat. No hace falta servidor de señalización propio.
+- **STUN:** servidores públicos gratuitos (p. ej. `stun:stun.l.google.com:19302`).
+- **TURN:** necesario como *fallback*. Opciones con tier gratis suficiente para escala chica:
+  **Cloudflare Calls**, **Metered**, **Twilio**. Se elige en `F9.7.1`. Config por env
+  (`TURN_URLS`, `TURN_USERNAME`, `TURN_CREDENTIAL`); una función `GET /api/voice/ice` entrega la lista ICE
+  (y credenciales efímeras si el proveedor las soporta).
+
+### 16.2 Cliente (`frontend/public/js/core/voice.js`)
+
+- `navigator.mediaDevices.getUserMedia({ audio: true })` — **solo al activar el micrófono** (permiso).
+- Una `RTCPeerConnection` por peer; `MediaStream` remoto → un `<audio autoplay>` por jugador.
+- **Muteado por defecto.** Mute local = `audioTrack.enabled = false` (no corta la conexión).
+- Indicador de "hablando": `AudioContext` + `AnalyserNode` sobre cada stream, umbral de nivel.
+- Mutear a un jugador puntual: `audioElement.volume = 0` para ese peer.
+- **Reglas de la malla:** el jugador que entra **después** manda la `offer` a cada presente; renegociación
+  si un peer se cae o cambia de red.
+
+### 16.3 Degradación y privacidad
+
+- Sin permiso de micrófono / navegador sin WebRTC / TURN caído → cartel claro
+  ("no pudimos activar el micrófono, seguí jugando igual"). **El juego nunca se bloquea por la voz.**
+- Al activar el micrófono, aviso: "los demás jugadores de la sala te van a escuchar".
+- El audio es **P2P y efímero** — no pasa por nuestro backend, no se graba, no se persiste.
+
+### 16.4 Complejidad estimada
+
+| Parte | Dificultad |
+|---|---|
+| Capturar audio, mute/unmute, permisos | Fácil |
+| `RTCPeerConnection` + signaling por Broadcast | Media (el "handshake" es fiddly pero muy trillado) |
+| TURN (elegir proveedor + credenciales) | Media (servicio externo, pero con tier gratis) |
+| UI: "quién habla", volumen por jugador, degradación | Media |
+| **Total** | **~1 Tema del roadmap. Costo ~cero a escala chica. No toca la lógica de juego.** |
 
 ---
 
