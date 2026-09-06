@@ -92,7 +92,7 @@ verdad falta uno, se deriva de los mismos tokens (`references/tailwind-preset.md
 - **Display / titulares / nombres de juego / números grandes:** `Bricolage Grotesque` 700–800,
   `letter-spacing: -.02em`. Clase: `font-display`.
 - **Cuerpo / labels / inputs / metadatos:** `Inter` 400–600.
-- `font-display: swap`, subset latino, self-hosted en `frontend/assets/fonts/` (no depender de Google
+- `font-display: swap`, subset latino, self-hosted en `frontend/public/assets/fonts/` (no depender de Google
   Fonts en runtime en producción).
 
 ## Radios, bordes, sombras

@@ -3,7 +3,12 @@
 // Tailwind CSS v3.4. Vive en la raíz del repo. Se compila con `npm run build:css` (script en package.json),
 // que Vercel corre en el build. El CLI se ejecuta desde la raíz.
 module.exports = {
-  content: ["./frontend/public/**/*.{html,js}", "./frontend/src/**/*.{html,js}"],
+  content: [
+    "./frontend/public/**/*.{html,js}",
+    "./frontend/src/**/*.{html,js}",
+    "!./frontend/public/vendor/**", // libs vendorizadas: no escanear
+    "!./frontend/public/app.css",
+  ],
   theme: {
     container: { center: true, padding: { DEFAULT: "1rem", md: "1.5rem" } },
     extend: {

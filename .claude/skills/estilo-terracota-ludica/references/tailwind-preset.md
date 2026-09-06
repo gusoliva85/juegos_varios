@@ -15,7 +15,12 @@ clases; nada de valores sueltos en `style=""` salvo cálculos de layout puntuale
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./frontend/public/**/*.{html,js}", "./frontend/src/**/*.{html,js}"],
+  content: [
+    "./frontend/public/**/*.{html,js}",
+    "./frontend/src/**/*.{html,js}",
+    "!./frontend/public/vendor/**",
+    "!./frontend/public/app.css",
+  ],
   theme: {
     container: { center: true, padding: { DEFAULT: "1rem", md: "1.5rem" } },
     extend: {

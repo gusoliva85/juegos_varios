@@ -152,24 +152,30 @@ juegos_varios/                    (raíz del repo)
 │  └─ tests/  (games/  api/)
 │
 ├─ frontend/
-│  ├─ public/                     # <- Vercel sirve esto
-│  │  ├─ index.html  jugar.html  perfil.html  creditos.html
-│  │  ├─ app.css                  # generado por Tailwind (gitignored)
-│  │  ├─ vendor/supabase.js       # @supabase/supabase-js v2 fijado
-│  │  └─ og/
 │  ├─ src/
-│  │  ├─ styles/app.css           # entrada Tailwind
-│  │  ├─ core/
-│  │  │  ├─ supabase.js           # crea el client (URL + anon key inyectadas en build)
-│  │  │  ├─ identity.js           # signInAnonymously + perfil (nombre/avatar)
-│  │  │  ├─ api.js                # fetch a /api/* con el Bearer token
-│  │  │  ├─ realtime.js           # suscripción a room_sync / player_view / presence
-│  │  │  ├─ store.js              # store observable (descarta rev viejo)
-│  │  │  └─ share.js  audio.js
-│  │  ├─ ui/  shell.js  catalog.js  lobby.js  components.js
-│  │  ├─ games/  index.js  tateti/view.js  ahorcado/view.js  batalla-naval/view.js  chinchon/view.js
-│  │  └─ assets/ index.js         # getCard / getBack / getToken
-│  └─ assets/  fonts/  deck/spanish/  backs/  tokens/  boards/  sfx/
+│  │  └─ styles/app.css           # ENTRADA Tailwind (único archivo del front que se "compila")
+│  └─ public/                     # <- lo que Vercel sirve TAL CUAL (sin bundler)
+│     ├─ index.html  jugar.html  perfil.html  creditos.html  styleguide.html
+│     ├─ app.css                  # SALIDA de Tailwind (gitignored; Vercel la genera en el build)
+│     ├─ env.js                   # window.__ENV__ = { SUPABASE_URL, SUPABASE_ANON_KEY }  (gitignored; lo escribe el build)
+│     ├─ vendor/
+│     │  └─ supabase.js           # @supabase/supabase-js v2, fijado (vendorizado)
+│     ├─ js/
+│     │  ├─ core/
+│     │  │  ├─ supabase.js        # crea el client desde window.__ENV__
+│     │  │  ├─ identity.js        # signInAnonymously + perfil (nombre/avatar)
+│     │  │  ├─ api.js             # fetch a /api/* con el Bearer token
+│     │  │  ├─ realtime.js        # suscripción a room_sync / player_view / presence
+│     │  │  ├─ store.js           # store observable (descarta rev viejo)
+│     │  │  └─ share.js  audio.js
+│     │  ├─ ui/    shell.js  catalog.js  lobby.js  components.js
+│     │  ├─ games/ index.js  tateti/view.js  ahorcado/view.js  batalla-naval/view.js  chinchon/view.js
+│     │  └─ assets.js             # getCard / getBack / getToken  (API de assets)
+│     └─ assets/
+│        ├─ fonts/                # bricolage-grotesque.woff2  inter.woff2  (OFL, self-hosted)
+│        ├─ decks/spanish/  backs/  tokens/  boards/   # sprites SVG
+│        ├─ sfx/                  # sfx.mp3  sfx.json
+│        └─ img/og/               # imágenes Open Graph por juego
 │
 ├─ supabase/
 │  ├─ config.toml
@@ -459,8 +465,8 @@ def apply(session, room_id, actor_id, kind, payload) -> None:
 2. `backend/app/games/<slug>/engine.py` → implementa `GameEngine`.
 3. `backend/app/games/<slug>/RULES.md` → sincronizado con `documentacion/reglas/`.
 4. `backend/tests/games/test_<slug>.py` → suite de lógica pura.
-5. `frontend/src/games/<slug>/view.js` → vista del `<main>` (usa layout de asientos + HUD + overlay).
-6. Registrar en `registry.py` y en `frontend/src/games/index.js`.
+5. `frontend/public/js/games/<slug>/view.js` → vista del `<main>` (usa layout de asientos + HUD + overlay).
+6. Registrar en `registry.py` y en `frontend/public/js/games/index.js`.
 
 ---
 
@@ -469,7 +475,7 @@ def apply(session, room_id, actor_id, kind, payload) -> None:
 - Paquete **interno** en `frontend/assets/`. Sin API de imágenes de terceros.
 - Formato: **SVG `<symbol>`** + `<use>`; tematización por variables CSS (`--back-color`, `--pip-color`,
   `--token-color`).
-- API JS: `frontend/src/assets/index.js` → `getCard('spanish','espada',7)`, `getBack(name)`,
+- API JS: `frontend/public/js/assets.js` → `getCard('spanish','espada',7)`, `getBack(name)`,
   `getToken(colorIndex)`. (Catálogo inicial: solo baraja española para Chinchón; el tablero de Batalla
   Naval es propio de ese juego. Baraja francesa / dados: backlog.)
 - Sonido: sprite `assets/sfx/sfx.mp3` + `sfx.json`, motor WebAudio propio, **muteado por defecto**.
@@ -542,8 +548,10 @@ Inyectadas por la integración Vercel↔Supabase + algunas propias. En `backend/
 | `APP_ROOM_TTL_EMPTY` / `APP_ROOM_TTL_IDLE` / `APP_GRACE_PERIOD` | Vercel | 120 s / 1800 s / 45 s. |
 | `APP_MAX_ROOMS_PER_PLAYER` | Vercel | 3. |
 
-El frontend recibe `SUPABASE_URL` y `SUPABASE_ANON_KEY` por sustitución en el build (un pequeño paso que
-reemplaza placeholders en `frontend/src/core/supabase.js` antes de servir).
+El frontend recibe `SUPABASE_URL` y `SUPABASE_ANON_KEY` a través de `frontend/public/env.js`, que un paso
+del build (`scripts/gen-env.mjs`, invocado desde `npm run build`) genera desde `process.env`:
+`window.__ENV__ = { SUPABASE_URL, SUPABASE_ANON_KEY }`. `env.js` está gitignoreado; `js/core/supabase.js`
+lo lee. Son claves públicas por diseño (la seguridad la da RLS).
 
 ---
 

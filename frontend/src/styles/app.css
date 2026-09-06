@@ -8,17 +8,17 @@
    Compila a public/app.css (Tailwind CLI v3.4, corrido desde frontend/).
    ============================================================ */
 
-/* ---- Fuentes self-hosted (se agregan en F0.2.1) ---- */
+/* ---- Fuentes self-hosted (variables, subset latino, de Fontsource / OFL) ---- */
 @font-face {
   font-family: "Bricolage Grotesque";
   src: url("/assets/fonts/bricolage-grotesque.woff2") format("woff2");
-  font-weight: 600 800;
+  font-weight: 200 800;
   font-display: swap;
 }
 @font-face {
   font-family: "Inter";
   src: url("/assets/fonts/inter.woff2") format("woff2");
-  font-weight: 400 600;
+  font-weight: 100 900;
   font-display: swap;
 }
 

@@ -50,12 +50,12 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 - [x] **F0.1.1** · [Infra] Crear el árbol `backend/` y `frontend/` según `02_Documento_Tecnico.md` §3 (`.gitkeep`). → *Prueba:* el árbol coincide. · *Aprobada.*
 - [x] **F0.1.2** · [Infra] `backend/`: `venv`, `requirements.txt`, `pyproject.toml` (pytest + ruff). → *Prueba:* `pip install` OK; `pytest` corre. · *Aprobada. (En F0.1.4 se separa: `backend/requirements.txt` = dev/test; `requirements.txt` raíz = deps de la función Vercel. Se quita `websockets`.)*
 - [x] **F0.1.3** · [Infra] `frontend/`: `tailwind.config.js` (preset de la skill) + `src/styles/app.css` + placeholder `public/index.html`. → *Prueba:* compila a `public/app.css` sin warnings. · *Aprobada. Tailwind v3.4.*
-- [ ] **F0.1.4** · [Infra] Configuración de build para Vercel: `package.json` (script `build:css` con Tailwind v3.4), `vercel.json` (`buildCommand`, `outputDirectory: frontend/public`, función `api/index.py`, rewrite `/api/(.*)`), `requirements.txt` **raíz** con las deps de la función (fastapi, sqlmodel, `psycopg[binary]`, pyjwt, pydantic-settings) y `backend/requirements.txt` reducido a dev/test (pytest, pytest-asyncio, httpx, ruff; sin uvicorn de prod, sin websockets). → *Prueba:* `npm run build:css` genera `frontend/public/app.css`; `python -c "import fastapi, sqlmodel, psycopg, jwt"` OK en el venv.
-- [ ] **F0.1.5** · [Infra] `.gitignore` (`.venv/`, `__pycache__/`, `frontend/public/app.css`, `node_modules/`, `.vercel/`, `.env*`, `supabase/.branches/`, `supabase/.temp/`) y `README.md` (qué es, cómo se despliega, cómo se prueba en Vercel; **sin** mención a arranque local como flujo principal). → *Prueba:* `git status` no lista generados; README revisado.
+- [x] **F0.1.4** · [Infra] Configuración de build para Vercel: `package.json` (`build:css` Tailwind v3.4), `vercel.json` (`buildCommand`, `outputDirectory: frontend/public`, función `api/index.py`, rewrite `/api/(.*)`), `tailwind.config.js` a la **raíz**, `requirements.txt` **raíz** (fastapi, sqlmodel, `psycopg[binary]`, pyjwt, pydantic-settings) y `backend/requirements.txt` reducido a dev/test (`-r ../requirements.txt` + pytest, pytest-asyncio, httpx, ruff; sin uvicorn/websockets). → *Prueba:* `npm run build:css` genera `frontend/public/app.css`; imports de la función OK. · *Aprobada.*
+- [x] **F0.1.5** · [Infra] `.gitignore` + `.gitattributes` (LF) + `README.md` (stack Vercel+Supabase, se prueba en preview). → *Prueba:* `git status` no lista generados. · *Aprobada.*
 
 ## Tema 0.2 · Sistema de diseño operativo
 
-- [ ] **F0.2.1** · [Diseño] Self-host de fuentes (**Bricolage Grotesque**, **Inter**, OFL) en `frontend/assets/fonts/` + `@font-face`. → *Prueba:* la preview usa las fuentes sin pedir nada a `fonts.gstatic`.
+- [~] **F0.2.1** · [Diseño] Self-host de fuentes (**Bricolage Grotesque**, **Inter**, variables, OFL) en `frontend/public/assets/fonts/` + `@font-face` + `LICENSES.md`. *(Esta tarea forzó la estructura del front: JS servido en `frontend/public/js/`, assets en `frontend/public/assets/`; `frontend/src/` queda solo para la entrada de Tailwind.)* → *Prueba (preview):* la página usa las fuentes sin pedir nada a `fonts.gstatic`.
 - [ ] **F0.2.2** · [Diseño] Verificar que `app.css` compilado tiene todas las clases del preset (`.btn`, `.card-chunky`, `.panel`, `.field`, `.chip`, `.badge-*`, `.pill`, `.bottom-nav`, `.seat`, `.skeleton`). → *Prueba:* búsqueda en `public/app.css`.
 - [ ] **F0.2.3** · [Diseño] `frontend/public/styleguide.html`: todos los componentes de `estilo-terracota-ludica/references/componentes.md`. → *Prueba:* en la preview de Vercel, comparación 1:1 contra el mockup 05.
 - [ ] **F0.2.4** · [Diseño] Verificar `prefers-reduced-motion` y `:focus-visible` en el styleguide. → *Prueba:* con reduce-motion activo en el SO.
@@ -75,13 +75,13 @@ GitHub, el proyecto Supabase creado y la función Python respondiendo `/api/heal
 
 ## Tema 0.4 · Repo, Supabase y despliegue en Vercel
 
-- [ ] **F0.4.1** · [Infra] `git init` + aplicar `.gitignore` + primer commit. Configurar el remoto SSH con la **Deploy Key** (`git@github-juegos:gusoliva85/juegos_varios.git`) y `git push -u origin main`. → *Prueba:* el repo en GitHub tiene el código; `git push` de prueba funciona sin pedir credenciales.
-- [ ] **F0.4.2** · [Infra] Crear el proyecto **Supabase "dev"**. Anotar en un gestor de secretos: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `DATABASE_URL` (pooler, 6543, transaction). `supabase init` en el repo (`supabase/config.toml`) + `supabase link`. → *Prueba:* `supabase db push` (sin migraciones aún) conecta OK.
-- [ ] **F0.4.3** · [Infra] Importar el repo en **Vercel**. Configurar: `buildCommand npm run build:css`, `outputDirectory frontend/public`. Activar la **integración Vercel↔Supabase** (inyecta las env vars). Primer deploy. → *Prueba:* la **URL de preview** sirve el placeholder `index.html` con `app.css` aplicado.
-- [ ] **F0.4.4** · [Backend] `api/index.py` (`from backend.app.main import app`) + `backend/app/main.py` (FastAPI, CORS con dominios de Vercel + `*.vercel.app` + localhost, `GET /api/health` → `{"status":"ok"}`). Ajustar `vercel.json` para la función Python. → *Prueba:* `https://<preview>/api/health` responde `{"status":"ok"}` **en Vercel**; test `pytest` local del health.
+- [x] **F0.4.1** · [Infra] `git init` + `.gitignore`/`.gitattributes` + primer commit. Remoto SSH con la **Deploy Key** (`git@github-juegos:gusoliva85/juegos_varios.git`, con *Allow write access*) y `git push -u origin main`. → *Prueba:* el repo en GitHub tiene el código. · *Aprobada (commits `2b4b933`, `a23d12b`).*
+- [ ] **F0.4.2** · [Infra] Crear el proyecto **Supabase "dev"**. Anotar: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `SUPABASE_JWT_SECRET`, `DATABASE_URL` (pooler, 6543, transaction). `supabase init` (`supabase/config.toml`) + `supabase link`. → *Prueba:* `supabase db push` (sin migraciones aún) conecta OK.
+- [x] **F0.4.3** · [Infra] Importar el repo en **Vercel** (preset "Other", root `./`; `vercel.json` define el build). Primer deploy. → *Prueba:* la **URL de preview** sirve el placeholder `index.html` con `app.css` aplicado. · *Aprobada — "quedó funcionando". La integración Vercel↔Supabase se hace en F0.4.2/F0.4.5.*
+- [x] **F0.4.4** · [Backend] `api/index.py` (ajusta `sys.path`, importa `app.main:app`) + `backend/app/main.py` (FastAPI ASGI, CORS `*.vercel.app` + localhost, `GET /api/health`). → *Prueba:* `https://<preview>/api/health` responde `{"status":"ok"}` en Vercel; `pytest` del health. · *Aprobada (hecha adelantada para que el primer deploy no fallara).*
 - [ ] **F0.4.5** · [Backend] `backend/app/config.py` (pydantic-settings con las vars de `02_Documento_Tecnico.md` §12) + `backend/app/db.py` (engine SQLModel al `DATABASE_URL` del pooler, `get_session`). Endpoint temporal `GET /api/health/db` → `SELECT 1`. → *Prueba:* `https://<preview>/api/health/db` responde OK (la función se conecta a Supabase Postgres).
 - [ ] **F0.4.6** · [DB] `supabase/migrations/0001_init.sql`: extensiones base (`pgcrypto`), esquema vacío, y un `README` corto del flujo de migración (crear archivo → `supabase db push` → commitear). → *Prueba:* `supabase db push` aplica sin error; `supabase migration list` la muestra aplicada.
-- [ ] **F0.4.7** · [Frontend] `frontend/src/core/supabase.js` (crea el client desde placeholders `%SUPABASE_URL%` / `%SUPABASE_ANON_KEY%`) + paso en `build:css`/script que sustituye los placeholders con las env de Vercel + `frontend/public/vendor/supabase.js` (`@supabase/supabase-js` v2 fijado). → *Prueba (preview):* en la consola del navegador, `window.supabase` existe y `await supabase.auth.getSession()` no tira error.
+- [ ] **F0.4.7** · [Frontend] `frontend/public/vendor/supabase.js` (`@supabase/supabase-js` v2 vendorizado y fijado) + `scripts/gen-env.mjs` (genera `frontend/public/env.js` con `window.__ENV__ = {SUPABASE_URL, SUPABASE_ANON_KEY}` desde `process.env`; `env.js` gitignoreado) invocado desde `npm run build` + `frontend/public/js/core/supabase.js` (crea el client desde `window.__ENV__`). → *Prueba (preview):* en la consola del navegador, el client existe y `await supabase.auth.getSession()` no tira error.
 
 > **Cierre Fase 0:** el portal se ve como el mockup **en una URL de Vercel**, el repo está en GitHub,
 > Supabase dev creado, `/api/health` y `/api/health/db` responden en la preview. Ninguna funcionalidad real.
@@ -108,8 +108,8 @@ tabla `player` (con RLS) y se muestra en la interfaz.
 
 ## Tema 1.3 · Frontend
 
-- [ ] **F1.3.1** · [Frontend] `src/core/identity.js`: al cargar, `supabase.auth.signInAnonymously()` si no hay sesión; expone `getPlayerId()`, `getToken()`. → *Prueba (preview):* primer ingreso crea sesión anónima; recarga la mantiene (localStorage de supabase-js).
-- [ ] **F1.3.2** · [Frontend] `src/core/api.js`: wrapper de `fetch` a `/api/*` con `Authorization: Bearer` + parseo de errores tipados. → *Prueba (preview):* llamada a `/api/players/me` con y sin perfil.
+- [ ] **F1.3.1** · [Frontend] `js/core/identity.js`: al cargar, `supabase.auth.signInAnonymously()` si no hay sesión; expone `getPlayerId()`, `getToken()`. → *Prueba (preview):* primer ingreso crea sesión anónima; recarga la mantiene (localStorage de supabase-js).
+- [ ] **F1.3.2** · [Frontend] `js/core/api.js`: wrapper de `fetch` a `/api/*` con `Authorization: Bearer` + parseo de errores tipados. → *Prueba (preview):* llamada a `/api/players/me` con y sin perfil.
 - [ ] **F1.3.3** · [Frontend] Modal "Elegí tu nombre y avatar" (usa `panel` + `field` + grilla de avatares). Aparece si el perfil no tiene nombre. Al confirmar → `POST /api/players`. → *Prueba (preview):* navegador limpio → aparece; confirmar → persiste tras recarga.
 - [ ] **F1.3.4** · [Frontend] Selector de avatares (set base SVG). → *Prueba (preview):* elegir, se guarda, se ve.
 - [ ] **F1.3.5** · [Frontend] Mostrar nombre + avatar en topbar y `perfil.html`; editar desde el perfil. → *Prueba (preview):* editar en el perfil se refleja en la topbar.
@@ -144,7 +144,7 @@ Objetivo: catálogo desde el backend; crear salas y unirse por código/enlace; v
 
 ## Tema 2.4 · Frontend catálogo
 
-- [ ] **F2.4.1** · [Frontend] `src/ui/catalog.js`: consume `GET /api/games`, renderiza el bento (reemplaza el hardcode de F0.3.5). → *Prueba (preview):* el catálogo carga del backend; cambiar un `status` se refleja al recargar.
+- [ ] **F2.4.1** · [Frontend] `js/ui/catalog.js`: consume `GET /api/games`, renderiza el bento (reemplaza el hardcode de F0.3.5). → *Prueba (preview):* el catálogo carga del backend; cambiar un `status` se refleja al recargar.
 - [ ] **F2.4.2** · [Frontend] Skeleton shimmer al cargar. → *Prueba (preview):* con red lenta se ven.
 - [ ] **F2.4.3** · [Frontend] Filtros por categoría (client-side) + badges de estado reales. → *Prueba (preview):* "Cartas" muestra solo Chinchón.
 - [ ] **F2.4.4** · [Prueba] Manual en la preview: catálogo carga, filtros, `coming_soon` no crea sala.
@@ -181,9 +181,9 @@ reconexión, traspaso de host y el botón "Empezar" (solo host) funcionan. Al in
 
 ## Tema 3.3 · Frontend
 
-- [ ] **F3.3.1** · [Frontend] `src/core/realtime.js`: `joinRoom(roomId)` → `supabase.channel('room:'+id)` con `postgres_changes` sobre `room_sync` + `player_view` (filtro `room_id`) + `presence`. Reintento de suscripción si se cae. → *Prueba (preview):* al entrar, llega el estado; cortar la red y volver → re-suscribe.
-- [ ] **F3.3.2** · [Frontend] `src/core/store.js`: store observable; ignora push con `rev` ≤ actual; combina `room_sync` (público) + `player_view` (privado) + `presence` (conectados). → *Prueba (preview):* un `rev` viejo no pisa el estado.
-- [ ] **F3.3.3** · [Frontend] `src/ui/lobby.js`: render reactivo de asientos/slots desde el store (reemplaza F2.5.3). → *Prueba (preview):* en 3 pestañas, un cambio se ve en todas en < 1 s.
+- [ ] **F3.3.1** · [Frontend] `js/core/realtime.js`: `joinRoom(roomId)` → `supabase.channel('room:'+id)` con `postgres_changes` sobre `room_sync` + `player_view` (filtro `room_id`) + `presence`. Reintento de suscripción si se cae. → *Prueba (preview):* al entrar, llega el estado; cortar la red y volver → re-suscribe.
+- [ ] **F3.3.2** · [Frontend] `js/core/store.js`: store observable; ignora push con `rev` ≤ actual; combina `room_sync` (público) + `player_view` (privado) + `presence` (conectados). → *Prueba (preview):* un `rev` viejo no pisa el estado.
+- [ ] **F3.3.3** · [Frontend] `js/ui/lobby.js`: render reactivo de asientos/slots desde el store (reemplaza F2.5.3). → *Prueba (preview):* en 3 pestañas, un cambio se ve en todas en < 1 s.
 - [ ] **F3.3.4** · [Frontend] Chip de conexión desde Presence (conectado / reconectando). Heartbeat `POST /ping` cada 20 s. → *Prueba (preview):* cerrar una pestaña → en las otras ese jugador pasa a "desconectado" tras el grace.
 - [ ] **F3.3.5** · [Frontend] Botón "listo / no listo" → `POST /ready`. Slots vacíos con invitación. → *Prueba (preview):* marcar listo se ve en las otras pestañas.
 - [ ] **F3.3.6** · [Frontend] Panel compartir **funcional**: copiar código, copiar enlace (`PUBLIC_BASE_URL` = dominio de la preview), botón WhatsApp (`wa.me/?text=` con "Te invito a jugar a <Juego> ➜ <enlace>"). → *Prueba (preview):* copiar pega bien; WhatsApp abre con el texto y el enlace de la preview.
@@ -224,9 +224,9 @@ revancha y rehidratación.
 
 ## Tema 4.4 · Frontend / mesa de Ta-Te-Ti
 
-- [ ] **F4.4.1** · [Frontend] `src/games/index.js`: `loadGame(slug)` con `import()` dinámico. → *Prueba (preview):* el chunk del juego se baja al iniciar la partida, no antes.
+- [ ] **F4.4.1** · [Frontend] `js/games/index.js`: `loadGame(slug)` con `import()` dinámico. → *Prueba (preview):* el chunk del juego se baja al iniciar la partida, no antes.
 - [ ] **F4.4.2** · [Frontend] Layout compartido del `<main>`: header de partida (juego, jugadores, turno `▷`, salir), zona de mesa centrada y escalable, chip de conexión. → *Prueba (preview):* en desktop la mesa está centrada y grande; en mobile ocupa el alto.
-- [ ] **F4.4.3** · [Frontend] `src/games/tateti/view.js`: tablero 3×3 (celdas ≥44px), render desde `player_view`, `tap` → `POST /action`; deshabilitado fuera de turno. Estilo de la skill. → *Prueba (preview):* jugar una partida entre dos pestañas.
+- [ ] **F4.4.3** · [Frontend] `js/games/tateti/view.js`: tablero 3×3 (celdas ≥44px), render desde `player_view`, `tap` → `POST /action`; deshabilitado fuera de turno. Estilo de la skill. → *Prueba (preview):* jugar una partida entre dos pestañas.
 - [ ] **F4.4.4** · [Frontend] Turno del bot: si `botToMove`, esperar ~700 ms y `POST /tick`. → *Prueba (preview):* partida vs bot termina sola.
 - [ ] **F4.4.5** · [Frontend] Overlay de resultado (`✦` ganador / empate) + "Revancha" (`POST /rematch`) + "Volver al portal". Transición de montaje del `<main>` (≤320ms; `reduced-motion`). → *Prueba (preview):* al terminar aparece; revancha reinicia.
 - [ ] **F4.4.6** · [Frontend] Rehidratación: al recargar o reconectar, re-suscribe el canal + `GET /api/rooms/{id}` + toma `player_view`. → *Prueba (preview):* recargar a mitad de partida recupera el tablero.
@@ -285,12 +285,12 @@ jugador**, **selección de objetivo** (3–4) y **eliminación**. Tablero propio
 Objetivo: baraja española + sonidos como paquete interno, tematizable, con licencias registradas. Acotado a
 lo que el catálogo inicial necesita.
 
-- [ ] **F7.1.1** · [Diseño] Estructura `frontend/assets/{deck/spanish, backs, tokens, sfx}` + `LICENSES.md`. `src/assets/index.js`: `getCard('spanish',suit,rank)`, `getBack(name)`, `getToken(i)` → nodos SVG. Sprites `<symbol>`/`<use>` + tematización por variables CSS. → *Prueba (preview):* página de test renderiza la baraja completa; cambiar `--back-color` cambia todos los dorsos.
+- [ ] **F7.1.1** · [Diseño] Poblar `frontend/public/assets/{decks/spanish, backs, tokens, sfx}` + `LICENSES.md`. `frontend/public/js/assets.js`: `getCard('spanish',suit,rank)`, `getBack(name)`, `getToken(i)` → nodos SVG. Sprites `<symbol>`/`<use>` + tematización por variables CSS. → *Prueba (preview):* página de test renderiza la baraja completa; cambiar `--back-color` cambia todos los dorsos.
 - [ ] **F7.2.1** · [Reglas/Diseño] Confirmar la baraja de Chinchón (RC-2: **40 + 2 comodines** propuesto). → *Prueba:* el cliente elige.
 - [ ] **F7.2.2** · [Diseño] Baraja española (40) importada de fuente de dominio público y normalizada al lenguaje visual de la skill; optimizar (< 60 KB gz). Comodín(es) + 2–3 dorsos + fichas/discos genéricos en 4 colores. → *Prueba (preview):* las 40 se ven bien a tamaño de mano en 375px; peso dentro del presupuesto.
 - [ ] **F7.2.3** · [Diseño] Procedencia + licencia de cada familia en `assets/LICENSES.md` y `creditos.html`. → *Prueba (preview):* `creditos.html` lista todo con enlace y licencia.
 - [ ] **F7.3.1** · [Diseño] SFX **CC0** (repartir, tomar carta, descartar, cerrar/victoria, disparo agua/tocado/hundido, letra ok/error, colocar ficha, entra jugador). → *Prueba:* set corto y consistente.
-- [ ] **F7.3.2** · [Frontend] Sprite `sfx.mp3` + `sfx.json` + `src/core/audio.js` (WebAudio), **muteado por defecto**; toggle en topbar/perfil persistido. → *Prueba (preview):* por defecto no suena; activado se escuchan; persiste tras recarga.
+- [ ] **F7.3.2** · [Frontend] Sprite `sfx.mp3` + `sfx.json` + `js/core/audio.js` (WebAudio), **muteado por defecto**; toggle en topbar/perfil persistido. → *Prueba (preview):* por defecto no suena; activado se escuchan; persiste tras recarga.
 - [ ] **F7.4.1** · [Frontend] Integrar audio en Ta-Te-Ti, Ahorcado y Batalla Naval. → *Prueba (preview):* suenan los eventos correctos en los 3.
 
 > **Cierre Fase 7:** paquete de assets listo para el juego de cartas.
@@ -342,7 +342,7 @@ ligar combinaciones, cerrar, puntaje acumulado, eliminación.
 - [ ] **F10.3.2** · [Frontend] Lazy-load de sprites no críticos; `content-visibility` donde ayude; Lighthouse mobile ≥ 90 en Performance y Best Practices. → *Prueba (preview):* reporte.
 - [ ] **F10.4.1** · [Frontend] Contraste AA en la paleta en uso; navegación por teclado del portal + `:focus-visible`; `aria-label` en assets (cartas, celdas de Batalla Naval), `aria-live` en el turno; `prefers-reduced-motion` en todas las animaciones (Fases 4–8). → *Prueba (preview):* checker de contraste + recorrido por teclado + reduce-motion.
 - [ ] **F10.4.2** · [Frontend] Prueba con lector de pantalla del flujo crear → invitar → unir → jugar Ta-Te-Ti. → *Prueba (preview):* el flujo es entendible sin ver.
-- [ ] **F10.5.1** · [Frontend] Textos de UI a `src/i18n/es-AR.js`; errores del backend con `code` estable + texto localizable. → *Prueba:* no quedan strings sueltos en el markup crítico.
+- [ ] **F10.5.1** · [Frontend] Textos de UI a `frontend/public/js/i18n/es-AR.js`; errores del backend con `code` estable + texto localizable. → *Prueba:* no quedan strings sueltos en el markup crítico.
 - [ ] **F10.6.1** · [Infra] Proyecto **Supabase "prod"** separado; segunda integración en Vercel para `main`; dominio de producción; env por entorno (preview → dev, production → prod). → *Prueba:* push a `main` deploya a producción contra la base prod; las previews siguen contra dev.
 - [ ] **F10.6.2** · [Infra] `core/ratelimit.py` → **Upstash Redis** (Vercel Marketplace); Open Graph **dinámico** (imagen de la mesa + ID) con Vercel OG. → *Prueba:* rate limit distribuido; la tarjeta de WhatsApp muestra el estado real.
 - [ ] **F10.6.3** · [Prueba] Smoke test en producción: crear sala, invitar por WhatsApp, jugar una partida de **cada uno de los 4 juegos**, reconectar. → *Prueba:* todo OK en el dominio de producción.
