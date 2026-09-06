@@ -522,7 +522,8 @@ def apply(session, room_id, actor_id, kind, payload) -> None:
 Codificadas en la skill (`estilo-terracota-ludica/references/*`). Puntos que la estructura debe soportar:
 
 - **Un solo HTML por pantalla** con clases responsive. No hay "versión mobile" aparte.
-- **Navegación:** `bottom-nav` (`md:hidden`) en mobile; enlaces en la topbar (`hidden md:flex`) en web.
+- **Navegación:** una sola, el **menú-hoja** que abre el `☰` de la topbar (hoja inferior en mobile, panel
+  arriba-derecha en `≥ md`). Sin footer, sin barra de navegación, sin enlaces sueltos en la topbar.
 - **Bento:** `grid-cols-2 → md:grid-cols-4 → xl:grid-cols-6`; celdas con `min-h`, **no** se estiran (si
   sobra ancho, entra otra columna).
 - **Contenedores** `max-w-[1160px] mx-auto`; CTA `w-full sm:w-auto`.
@@ -570,15 +571,18 @@ editar  →  git push  →  Vercel construye una PREVIEW  →  el cliente abre l
   el código que las necesita llegue a la preview. Cada tarea que toca el esquema incluye su migración.
 - **Local opcional** (para iterar rápido sin gastar deploys): `vercel dev` + `supabase start`. No es donde
   se valida; el cliente valida en la preview.
-- **`vercel.json`** (esquema):
+- **`vercel.json`** (el real, en la raíz del repo):
   ```json
   {
+    "$schema": "https://openapi.vercel.sh/vercel.json",
     "buildCommand": "npm run build:css",
     "outputDirectory": "frontend/public",
-    "functions": { "api/index.py": { "maxDuration": 30 } },
+    "functions": { "api/index.py": { "includeFiles": "backend/**", "maxDuration": 30 } },
     "rewrites": [{ "source": "/api/(.*)", "destination": "/api/index" }]
   }
   ```
+  `includeFiles: "backend/**"` es lo que hace que el paquete Python (`backend/app/`) viaje dentro del
+  bundle de la función; `api/index.py` ajusta `sys.path` y hace `from app.main import app`.
 
 ---
 

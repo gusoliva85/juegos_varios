@@ -428,11 +428,13 @@ juego), 60 fps en el fondo animado en gama media, animaciones desactivables. Cad
 
 ### 9.1 Portal (cascarón fijo)
 
-- **Clima**: "club de juegos premium" — mesa de fieltro + materiales nobles (madera, latón/oro viejo,
-  papel), no casino chillón ni arcade infantil.
-- **Estructura**: barra superior mínima (marca, buscador de juego, avatar, tema) · hero corto con CTA
-  "Crear sala rápida" · **catálogo tipo bento** (tarjetas de distinto tamaño, no grilla uniforme) ·
-  módulo "Unirse con código" siempre accesible · footer con créditos.
+> **Dirección de arte definitiva:** la del mockup **`mockups/05_terracota_ludica.html`**, congelada en la
+> skill **`estilo-terracota-ludica`**. Lo que sigue es la intención original; donde difiera, manda la skill.
+
+- **Estructura**: topbar mínima (marca · indicador de estado · botón `☰`) · **una sola navegación** por el
+  menú-hoja que abre el `☰` (Inicio / Juegos / Créditos / Mi perfil) — **sin footer ni barra de
+  navegación** · hero corto con CTA "Crear sala rápida" · **catálogo tipo bento** (tarjetas de distinto
+  tamaño, no grilla uniforme) · módulo "Unirse con código" siempre accesible.
 - **Superficies**: vidrio real (blur + ring interior + sombra en capas), no "card de catálogo" con
   `border-gray-200`.
 - **Un acento de marca** + un set de estados (en sala / jugando / lleno / próximamente). Sin segundo color

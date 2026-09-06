@@ -6,8 +6,9 @@ description: Sistema de diseño único y obligatorio de la plataforma de minijue
 # estilo-terracota-ludica — Sistema de diseño de "Mesa & Ficha"
 
 Única fuente de verdad visual del proyecto. Ninguna pantalla se diseña "a criterio libre": se compone con
-lo que ya está definido acá, tomado 1:1 de **`documentacion/mockups/05_terracota_ludica.html`**, que es el
-contrato pixel a pixel. Esta skill es su documentación reutilizable.
+lo que ya está definido acá. El mockup **`documentacion/mockups/05_terracota_ludica.html`** es la
+**referencia de paleta, tipografía, texturas y componentes**; **esta skill manda** donde difieran (p. ej.
+navegación: el mockup tenía footer y nav en la topbar; se sacaron — ver "Layout").
 
 ## Misión
 
@@ -121,11 +122,10 @@ Ver `references/componentes.md` → "Shell responsive" para el HTML/clases. Resu
 
 - **Contenedor:** todo el contenido dentro de `mx-auto w-full max-w-[1160px] px-6`. En mobile el padding
   baja a `px-4`.
-- **Navegación:**
-  - **Mobile (< `md`):** barra superior compacta (marca + estado + botón de menú) y **barra inferior fija**
-    (`bottom-nav`) con 3–4 destinos e íconos. El menú completo abre como hoja desde abajo.
-  - **Web (≥ `md`):** la barra inferior **desaparece**; los destinos pasan a la barra superior como enlaces.
-    Nada de dejar la bottom-nav flotando en desktop.
+- **Navegación:** **una sola** — la topbar compacta (marca · indicador de estado · botón `☰`) y el
+  **menú-hoja** que abre el `☰`: hoja inferior en mobile, panel arriba-derecha en `≥ md`. **No hay footer,
+  no hay barra de navegación inferior, no hay enlaces sueltos en la topbar.** El menú lo maneja
+  `frontend/public/js/ui/shell.js`.
 - **Bento del catálogo:** `grid grid-cols-2` en mobile → `md:grid-cols-4` → `xl:grid-cols-6`. La tarjeta
   destacada: `col-span-2 xl:col-span-3`. Las celdas **mantienen `min-h`** y no se estiran de más; si sobra
   ancho, entra otra columna, no se infla la celda.
@@ -167,10 +167,10 @@ caído), `slot vacío` (silla abierta), `campo de compartir` (valor + botón cop
 
 - **`references/tailwind-preset.md`** — `tailwind.config` completo (colores, fuentes, radios, sombras,
   keyframes), el `@layer base` y el `@layer components` con todas las clases (`.btn`, `.card-chunky`,
-  `.chip`, `.badge-state`, `.field`, `.bottom-nav`, …). Copiar de ahí, no reinventar.
-- **`references/componentes.md`** — HTML + clases de cada patrón: shell responsive (topbar + bottom-nav),
-  hero, módulo "unirse con código", bento del catálogo, sala de espera (asientos + compartir + WhatsApp +
-  iniciar), overlay de resultado, y los estados (conexión, error, vacío, skeleton).
+  `.chip`, `.badge-state`, `.field`, `.pill`, `.seat`, `.toast`, `.skeleton`, …). Copiar de ahí, no reinventar.
+- **`references/componentes.md`** — HTML + clases de cada patrón: shell responsive (topbar + menú-hoja del
+  `☰`), hero, módulo "unirse con código", bento del catálogo, sala de espera (asientos + compartir +
+  WhatsApp + iniciar), overlay de resultado, y los estados (conexión, error, vacío, skeleton).
 
 Antes de escribir la primera línea de una pantalla: leer las dos referencias. Es más rápido adaptar un
 patrón resuelto que reinventarlo y caer, sin querer, en la estética genérica que esta skill existe para evitar.
