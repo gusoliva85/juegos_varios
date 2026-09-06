@@ -7,16 +7,108 @@
     <link rel="stylesheet" href="/app.css" />
   </head>
   <body>
-    <!-- Stub mínimo (F0.3.2). El cascarón completo llega en F0.3.8. -->
-    <main class="container max-w-[1160px]">
-      <section class="panel !shadow-soft max-w-md mx-auto my-16 p-8 text-center">
-        <div class="font-display font-extrabold text-[40px] text-terra">◈</div>
-        <h1 class="font-display font-extrabold text-xl mt-2">Créditos</h1>
-        <p class="text-ink-2 text-sm mt-1">
-          Acá van las fuentes, cartas, dados y sonidos con sus licencias. Se completa más adelante.
+    <!-- ============ Topbar ============ -->
+    <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
+      <div class="container max-w-[1160px] flex items-center gap-4 py-3">
+        <a
+          href="/"
+          class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5 shrink-0"
+        >
+          <span
+            class="w-9 h-9 grid place-items-center rounded-[11px] border-2 border-ink bg-terra text-paper text-base shadow-hard -rotate-3"
+            aria-hidden="true"
+            >◈</span
+          >
+          Mesa &amp; Ficha
+        </a>
+        <span class="pill ml-auto"><span class="dot"></span> en línea</span>
+        <button
+          class="btn !p-2 !shadow-hard-sm"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu-sheet"
+          data-sheet="menu"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ Menú-hoja ============ -->
+    <div id="menu-sheet" hidden>
+      <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
+      <div
+        class="fixed inset-x-0 bottom-0 z-50 border-t-2 border-ink bg-cream p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] animate-slide-up md:inset-x-auto md:right-4 md:top-[68px] md:bottom-auto md:w-[300px] md:rounded-lg md:border-2 md:shadow-soft-lg"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú"
+      >
+        <div class="mx-auto max-w-[420px] flex flex-col gap-2">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-display font-extrabold text-lg">Menú</span>
+            <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
+          </div>
+          <a href="/" class="btn w-full">Inicio</a>
+          <a href="/#catalogo" class="btn w-full">Juegos</a>
+          <a href="/creditos.html" class="btn w-full" aria-current="page">Créditos</a>
+          <a href="/perfil.html" class="btn btn-primary w-full">Mi perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="container max-w-[1160px] pb-16 md:pb-20 pt-8">
+      <div class="max-w-[720px]">
+        <span class="badge-rot">◆ atribuciones</span>
+        <h1 class="font-display font-extrabold text-[clamp(2rem,4.5vw,2.75rem)] tracking-[-.025em] my-3">
+          Créditos
+        </h1>
+        <p class="text-ink-2">
+          Todo el material de terceros que usa la plataforma, con su autor y su licencia. Preferimos
+          licencias libres (CC0, MIT, OFL, dominio público).
         </p>
-        <a href="/" class="btn btn-primary btn-full mt-5">Volver al portal ▷</a>
-      </section>
+
+        <!-- Tipografía -->
+        <section class="panel !shadow-soft p-5 mt-6">
+          <h2 class="font-display font-extrabold text-lg">Tipografía</h2>
+          <ul class="mt-3 flex flex-col gap-3 text-sm">
+            <li class="flex flex-wrap items-baseline gap-x-2">
+              <span class="font-display font-extrabold">Bricolage Grotesque</span>
+              <span class="text-ink-3">— Mathieu Triay · <b>SIL OFL 1.1</b> · self-hosted</span>
+            </li>
+            <li class="flex flex-wrap items-baseline gap-x-2">
+              <span class="font-semibold">Inter</span>
+              <span class="text-ink-3">— Rasmus Andersson · <b>SIL OFL 1.1</b> · self-hosted</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Cartas, dados y fichas -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <h2 class="font-display font-extrabold text-lg">Cartas, dados y fichas</h2>
+          <p class="text-ink-3 text-sm mt-2">
+            La baraja española y el resto de los assets se agregan en la Fase 7, cada uno con su procedencia
+            y licencia acá.
+          </p>
+        </section>
+
+        <!-- Sonidos -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <h2 class="font-display font-extrabold text-lg">Sonidos</h2>
+          <p class="text-ink-3 text-sm mt-2">Efectos y música bajo CC0 — se agregan en la Fase 7.</p>
+        </section>
+
+        <!-- Herramientas -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <h2 class="font-display font-extrabold text-lg">Construido con</h2>
+          <p class="text-ink-3 text-sm mt-2">
+            Tailwind CSS (MIT) · Supabase · Vercel · FastAPI (MIT).
+          </p>
+        </section>
+
+        <a href="/" class="btn btn-primary btn-full mt-6">Volver al portal ▷</a>
+      </div>
     </main>
+
+    <script type="module" src="/js/ui/shell.js"></script>
   </body>
 </html>

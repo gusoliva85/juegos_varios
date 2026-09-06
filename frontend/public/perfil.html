@@ -7,16 +7,108 @@
     <link rel="stylesheet" href="/app.css" />
   </head>
   <body>
-    <!-- Stub mínimo (F0.3.2). El cascarón completo y la edición de perfil llegan en F0.3.8 / Fase 1. -->
-    <main class="container max-w-[1160px]">
-      <section class="panel !shadow-soft max-w-md mx-auto my-16 p-8 text-center">
-        <div class="font-display font-extrabold text-[40px] text-terra">★</div>
-        <h1 class="font-display font-extrabold text-xl mt-2">Mi perfil</h1>
-        <p class="text-ink-2 text-sm mt-1">
-          Nombre, avatar y últimas partidas. Se arma en la Fase 1.
-        </p>
-        <a href="/" class="btn btn-primary btn-full mt-5">Volver al portal ▷</a>
-      </section>
+    <!-- ============ Topbar ============ -->
+    <header class="sticky top-0 z-30 border-b-2 border-ink bg-cream/90 backdrop-blur">
+      <div class="container max-w-[1160px] flex items-center gap-4 py-3">
+        <a
+          href="/"
+          class="font-display font-extrabold text-xl tracking-[-.02em] flex items-center gap-2.5 shrink-0"
+        >
+          <span
+            class="w-9 h-9 grid place-items-center rounded-[11px] border-2 border-ink bg-terra text-paper text-base shadow-hard -rotate-3"
+            aria-hidden="true"
+            >◈</span
+          >
+          Mesa &amp; Ficha
+        </a>
+        <span class="pill ml-auto"><span class="dot"></span> en línea</span>
+        <button
+          class="btn !p-2 !shadow-hard-sm"
+          aria-label="Abrir menú"
+          aria-expanded="false"
+          aria-controls="menu-sheet"
+          data-sheet="menu"
+        >
+          ☰
+        </button>
+      </div>
+    </header>
+
+    <!-- ============ Menú-hoja ============ -->
+    <div id="menu-sheet" hidden>
+      <div class="fixed inset-0 z-40 bg-ink/20" data-sheet-close aria-hidden="true"></div>
+      <div
+        class="fixed inset-x-0 bottom-0 z-50 border-t-2 border-ink bg-cream p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] animate-slide-up md:inset-x-auto md:right-4 md:top-[68px] md:bottom-auto md:w-[300px] md:rounded-lg md:border-2 md:shadow-soft-lg"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Menú"
+      >
+        <div class="mx-auto max-w-[420px] flex flex-col gap-2">
+          <div class="flex items-center justify-between mb-1">
+            <span class="font-display font-extrabold text-lg">Menú</span>
+            <button class="btn !p-2 !shadow-hard-sm" aria-label="Cerrar menú" data-sheet-close>✕</button>
+          </div>
+          <a href="/" class="btn w-full">Inicio</a>
+          <a href="/#catalogo" class="btn w-full">Juegos</a>
+          <a href="/creditos.html" class="btn w-full">Créditos</a>
+          <a href="/perfil.html" class="btn btn-primary w-full" aria-current="page">Mi perfil</a>
+        </div>
+      </div>
+    </div>
+
+    <main class="container max-w-[1160px] pb-16 md:pb-20 pt-8">
+      <div class="max-w-[640px]">
+        <span class="badge-rot">★ tu identidad</span>
+        <h1 class="font-display font-extrabold text-[clamp(2rem,4.5vw,2.75rem)] tracking-[-.025em] my-3">
+          Mi perfil
+        </h1>
+
+        <!-- Identidad -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <div class="flex items-center gap-4">
+            <span
+              class="w-14 h-14 grid place-items-center border-2 border-ink rounded-[14px] bg-cream-2 font-display font-extrabold text-2xl text-ink-3"
+              aria-hidden="true"
+              >?</span
+            >
+            <div>
+              <p class="font-display font-extrabold text-lg text-ink-3">Sin nombre todavía</p>
+              <p class="text-ink-3 text-xs mt-0.5">
+                Te vamos a pedir un nombre la primera vez que entres a un juego.
+              </p>
+            </div>
+          </div>
+          <button type="button" class="btn btn-full mt-4" disabled>Elegir nombre y avatar</button>
+          <p class="text-ink-3 text-[11px] mt-2">Disponible en la Fase 1.</p>
+        </section>
+
+        <!-- Guardar en cualquier dispositivo -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <h2 class="font-display font-extrabold text-lg">Guardá tu nombre en cualquier dispositivo</h2>
+          <p class="text-ink-3 text-sm mt-2">
+            Por defecto tu nombre queda guardado solo en este navegador. Podés vincular un email o tu cuenta
+            de Google para que te siga en cualquier lado (opcional).
+          </p>
+          <div class="flex flex-wrap gap-2 mt-3">
+            <button type="button" class="btn" disabled>Vincular email</button>
+            <button type="button" class="btn" disabled>Vincular Google</button>
+          </div>
+          <p class="text-ink-3 text-[11px] mt-2">Disponible más adelante (Fase 11).</p>
+        </section>
+
+        <!-- Últimas partidas -->
+        <section class="panel !shadow-soft p-5 mt-4">
+          <h2 class="font-display font-extrabold text-lg">Últimas partidas</h2>
+          <div class="text-center text-ink-3 py-8">
+            <div class="font-display font-extrabold text-2xl" aria-hidden="true">◈</div>
+            <p class="text-sm mt-2 font-semibold">Todavía no jugaste ninguna partida.</p>
+          </div>
+        </section>
+
+        <a href="/#catalogo" class="btn btn-primary btn-full mt-6">Elegir un juego ▷</a>
+      </div>
     </main>
+
+    <script type="module" src="/js/ui/shell.js"></script>
   </body>
 </html>
